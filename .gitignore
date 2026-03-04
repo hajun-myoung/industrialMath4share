@@ -1,0 +1,8 @@
+node_modules
+build/
+dist/
+uploads/
+package-lock.json
+*.dat
+*.db
+*.sqlite
