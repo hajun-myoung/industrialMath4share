@@ -12,7 +12,7 @@
 세계적으로 합의한 규격입니다.  
 즉, 세계 각국에서 사용하는 문자들을 "표준화된 코드"로 일대일 대응시키고,
 컴퓨터에서 이러한 코드를 바탕으로 사용자에게 "문자"로 보여주게 됩니다.  
-이러한 유니코드는 "Unicord Consortium(유니코드 컨소시엄)"
+이러한 유니코드는 "Unicode Consortium(유니코드 컨소시엄)"
 에서 정의하고, 배포하고 있습니다.
 
 다만, 사람이 만드는 체계이기 때문에 "모든 문자"를 담아내지는 못합니다.  
@@ -32,8 +32,8 @@
 전송(transmission)에 적합한 신호를 만들어낸다"고
 설명합니다.
 
-여기서 "송신기"가 현대의 "인코더"를 의미하는 것으로서,  
-인코딩은 "특정한 데이터를 알맞은 전자 신호(=코드)로의 변환"을 의미합니다.
+여기서 송신기(transmitter)는 메시지를 전송 가능한 신호로 변환하는 장치이며,
+현대 정보이론에서 이를 "encoding 과정"으로 이해할 수 있습니다.
 
 ### 문자 인코딩
 
@@ -117,9 +117,9 @@ true
 false
 ```
 
-### endsWidth
+### endsWith
 
-String.prototype.endsWidth(searchingString [, length]) 메서드는
+String.prototype.endsWith(searchingString [, length]) 메서드는
 매개변수로 주어진 `searchingString` 으로 "끝나는지"를 반환합니다
 
 ```js
@@ -129,11 +129,11 @@ false
 true
 ```
 
-### slice
+### split
 
 String.prototype.split([sep [, limit]]) 메서드는
 서브스트링 `sep`을 기준으로 원래의 문자열을 분리합니다.  
-이 때, 반환은 List 타입으로 이루어지며, 모든 매개변수가 optional 입니다
+이 때, 반환은 Array 타입으로 이루어지며, 모든 매개변수가 optional 입니다
 
 ```js
 > myStr.split()
