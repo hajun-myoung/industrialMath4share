@@ -228,8 +228,8 @@ console.log(user);
 const username = 'username';
 const email = 'email';
 const myObj = {
-  username,
-  email,
+  [username]: username,
+  [email]: email,
 };
 console.log(myObj);
 ```
