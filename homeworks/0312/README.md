@@ -21,7 +21,7 @@
 
 ### 인코딩
 
-<div style="
+<!-- <div style="
         border-left:4px solid green;
         padding:10px;
         background:#fff8e6;
@@ -36,7 +36,12 @@
     <div style="text-align: right">
         - Shannon, A Mathematical Theory of Communication (1948)
     </div>
-</div>
+</div> -->
+
+> 📚 **Reference**
+>
+> A transmitter operates on the message to produce a signal suitable for transmission  
+> Shannon, A Mathematical Theory of Communication (1948)
 
 미국의 수학자이자 전기공학자, 암호학자인 Clause Shannon은 그의 저서
 "A Mathematical Theory of Communication"를 통해
@@ -49,7 +54,7 @@
 
 ### 문자 인코딩
 
-<div style="
+<!-- <div style="
         border-left:4px solid green;
         padding:10px;
         background:#fff8e6;
@@ -66,7 +71,12 @@
         <br />
         The Unicode® Standard: A Technical Introduction
     </div>
-</div>
+</div> -->
+
+> 📚 **Reference**
+>
+> The Unicode Standard assigns each character a unique numeric value  
+> Unicode Consortium, The Unicode® Standard: A Technical Introduction
 
 한편, 유니코드를 정의하고 배포하는 "Unicode Consortium"에서는
 "유니코드는 각각의 문자를 고유한 숫자로 대응시킨다"고 설명합니다.
