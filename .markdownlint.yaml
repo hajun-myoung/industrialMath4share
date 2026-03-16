@@ -2,3 +2,4 @@ default: true
 MD040: false # Fenced code blocks should have a language
 MD033: false # No Internal HTML; For using quote box
 MD024: false # multiple header;
+MD013: false # length limit;
