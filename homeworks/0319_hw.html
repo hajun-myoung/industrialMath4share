@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>0319 Assign</title>
+  </head>
+  <body>
+    <script>
+      const body = document.body;
+
+      /**
+       * 4번. 이미지 추가하기
+       */
+      const newDiv = document.createElement('div');
+      const newImg = document.createElement('img');
+
+      newImg.src =
+        'https://images.unsplash.com/photo-1768434118991-667871772318?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ỉxid-M3wxMjA3fDB8MHxwaG90by1wYWd1fHx8fGVufDB8fHx8fA%3';
+      newImg.width = 300;
+      newDiv.appendChild(newImg);
+      body.appendChild(newDiv);
+
+      /**
+       * 5번. 태그 설명하고 리스트 추가하기
+       *
+       * ul, ol, li 태그는 모두 HTML 내에서 "List"를 만들기 위한 요소들입니다
+       * 기본적으로 리스트의 "아이템" 들은 모두 li 태그를 사용하여 표현하는데,
+       * 이들 목록을 감싸는 태그에 따라서, 리스트의 표현 방식이 다릅니다.
+       *
+       * ul 태그로 전체 리스트를 감싸는 경우, 이 리스트는 Unordered List, 즉 "순서가 없는 목록"이 됩니다.
+       * Bullet list라고도 많이 표현되는 형태로서, 번호 없이 점으로 이어진 목록으로 표현됩니다
+       *
+       * ol 태그로 전체 리스트를 감싸는 경우, 이 리스는 Ordered List, 즉 "순서가 있는 목록"이 됩니다.
+       * Numbered list라고도 많이 표현되는 형태로서, 번호로 순서가 매겨진 목록이 됩니다
+       */
+
+      const listWrapper = document.createElement('ul');
+      ['하나', '둘', '셋'].forEach((val) => {
+        const newItem = document.createElement('li');
+        newItem.innerText = val;
+        listWrapper.appendChild(newItem);
+      });
+
+      body.appendChild(listWrapper);
+    </script>
+  </body>
+</html>
