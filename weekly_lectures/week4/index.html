@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>0326</title>
+    <style>
+      @keyframes pulseScale {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .divs {
+        background-color: black;
+        width: 100vw;
+      }
+
+      #secondDiv {
+        display: flex;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="firstDiv" class="divs">1번째 div</div>
+    <div id="secondDiv" class="divs">2번째 div</div>
+    <div id="thirdDiv" class="divs">3번째 div</div>
+
+    <script>
+      const target = document.getElementById('secondDiv');
+      console.log('두 번째 div: ', target);
+      target.style.color = 'crimson';
+      target.style.fontSize = '120px';
+      target.style.fontWeight = 'bold';
+      target.style.transform = 'scale(1, 0.4)';
+      target.style.animation = 'pulseScale 7s infinite linear';
+      //   target.style.transformOrigin = 'left center';
+      target.style.transformOrigin = 'center';
+      //   target.style.marginLeft = '25vw';
+      target.style.marginTop = '45vh';
+      //   target.innerText = '스크립트로 통제되고 있는 DIV';
+      target.innerText = '산업수학은 정말 최고야';
+      target.textAlign = 'center';
+
+      const divs = document.querySelector('.divs');
+      //   console.log(divs);
+
+      document.body.style.backgroundColor = 'gold';
+    </script>
+  </body>
+</html>
