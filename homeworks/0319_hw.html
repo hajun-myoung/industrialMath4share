@@ -35,13 +35,16 @@
        * Numbered list라고도 많이 표현되는 형태로서, 번호로 순서가 매겨진 목록이 됩니다
        */
 
+      // Way01, forEach
       const listWrapper = document.createElement('ul');
       ['하나', '둘', '셋'].forEach((val) => {
         const newItem = document.createElement('li');
         newItem.innerText = val;
         listWrapper.appendChild(newItem);
       });
+      body.appendChild(listWrapper);
 
+      // Way02, for of
       const listWrapper2 = document.createElement('ul');
       const items = ['하나', '둘', '셋'];
 
@@ -50,15 +53,17 @@
         newItem.innerText = item;
         listWrapper2.appendChild(newItem);
       }
+      body.appendChild(listWrapper2);
 
+      // Way03, for
+      const listWrapper3 = document.createElement('ul');
       for (let i = 0; i < 3; i++) {
         const newItem = document.createElement('li');
         newItem.innerText = items[i];
-        listWrapper2.appendChild(newItem);
+        listWrapper3.appendChild(newItem);
       }
 
-      body.appendChild(listWrapper);
-      body.appendChild(listWrapper2);
+      body.appendChild(listWrapper3);
     </script>
   </body>
 </html>
