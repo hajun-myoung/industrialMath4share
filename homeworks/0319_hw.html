@@ -42,7 +42,23 @@
         listWrapper.appendChild(newItem);
       });
 
+      const listWrapper2 = document.createElement('ul');
+      const items = ['하나', '둘', '셋'];
+
+      for (const item of items) {
+        const newItem = document.createElement('li');
+        newItem.innerText = item;
+        listWrapper2.appendChild(newItem);
+      }
+
+      for (let i = 0; i < 3; i++) {
+        const newItem = document.createElement('li');
+        newItem.innerText = items[i];
+        listWrapper2.appendChild(newItem);
+      }
+
       body.appendChild(listWrapper);
+      body.appendChild(listWrapper2);
     </script>
   </body>
 </html>
