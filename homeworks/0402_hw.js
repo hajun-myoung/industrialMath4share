@@ -17,7 +17,7 @@ function generateRandomStringMinMax(min = 2, max = 10) {
 
 function generateMail(min = 2, max = 6) {
   const mails = ['korea.ac.kr', 'naver.com', 'google.com'];
-  return `${generateRandomStringMinMax(min, max)}@${mails[Math.floor(Math.random() * 2)]}`;
+  return `${generateRandomStringMinMax(min, max)}@${mails[Math.floor(Math.random() * 3)]}`;
 }
 
 /**
