@@ -1,0 +1,102 @@
+import * as validation from '../util/validation.js';
+import * as storage from '../util/storage.js';
+
+console.log('Signup Script Has Benn Loaded');
+
+/**
+ * @param {HTMLElement} errorBox
+ * @param {String} message
+ */
+function showError(errorBox, message) {
+  errorBox.textContent = message;
+  errorBox.style.paddingTop = '10px';
+  errorBox.style.paddingBottom = '10px';
+  errorBox.style.opacity = '1';
+
+  errorBox.style.height = 'auto';
+  const targetHeight = errorBox.scrollHeight;
+  errorBox.style.height = '0px';
+
+  requestAnimationFrame(() => {
+    errorBox.style.height = `${targetHeight}px`;
+  });
+
+  setTimeout(() => {
+    hideError(errorBox);
+  }, 3000);
+
+  return true;
+}
+
+/**
+ * @param {HTMLElement} errorBox
+ */
+function hideError(errorBox) {
+  errorBox.style.height = `${errorBox.scrollHeight}px`;
+
+  requestAnimationFrame(() => {
+    errorBox.style.height = '0px';
+    errorBox.style.opacity = '0';
+    errorBox.style.paddingTop = '0px';
+    errorBox.style.paddingBottom = '0px';
+  });
+
+  setTimeout(() => {
+    errorBox.textContent = '';
+  }, 350);
+
+  return true;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const e_id = document.getElementById('input-id');
+  const e_pw = document.getElementById('input-pw');
+  const e_pwConfirm = document.getElementById('input-pwConfirm');
+  const e_signupBtn = document.getElementById('signup');
+
+  // error boxes
+  const e_id_error = document.querySelector('#formWrapper > form > div:nth-child(1) > div');
+  const e_pw_error = document.querySelector('#formWrapper > form > div:nth-child(2) > div');
+  const e_pwConfirm_error = document.querySelector('#formWrapper > form > div:nth-child(3) > div');
+
+  // console.log(e_id, e_pw, e_pwConfirm);
+  e_signupBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+
+    const id = e_id.value;
+    const pw = e_pw.value;
+    const pwConfirm = e_pwConfirm.value;
+
+    try {
+      validation.ValidateEmail(id);
+    } catch (err) {
+      console.log(err);
+      showError(e_id_error, `🚨 ${err.message.split('Error: ')[0]}`);
+      return;
+    }
+
+    try {
+      validation.ValidatePassword(pw);
+    } catch (err) {
+      console.log(err);
+      showError(e_pw_error, `🚨 ${err.message.split('Error: ')[0]}`);
+      return;
+    }
+
+    if (!validation.ValidatePasswordConfirm(pw, pwConfirm)) {
+      console.log('Password and Confirmation are not equal');
+      showError(e_pwConfirm_error, `🚨 비밀번호화 비밀번호 확인이 다릅니다`);
+      return;
+    }
+
+    const result = await storage.newUser(id, pw);
+    if (!result) {
+      alert('오류가 발생했습니다. 개발자에게 문의하세요.');
+    }
+
+    e_id.value = '';
+    e_pw.value = '';
+    e_pwConfirm.value = '';
+    console.log('singed up');
+  });
+});

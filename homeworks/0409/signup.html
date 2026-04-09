@@ -4,6 +4,48 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>0409: Signup page</title>
+    <link rel="stylesheet" href="css/global.css" />
+    <script type="module" src="./js/pages/signup.js"></script>
   </head>
-  <body></body>
+  <body class="centralize">
+    <div id="wrapper">
+      <div class="card-title centralize bold-text">회원가입</div>
+      <div id="formWrapper">
+        <form action="">
+          <div class="formSection">
+            <!-- id -->
+            <label for="id">이메일</label>
+            <input type="text" name="id" id="input-id" placeholder="your@email.com" />
+            <div class="error-box"></div>
+          </div>
+          <div class="formSection">
+            <!-- pw -->
+            <label for="pw">비밀번호</label>
+            <input type="password" name="pw" id="input-pw" placeholder="최소 8자 이상 입력하세요" />
+            <div class="error-box"></div>
+          </div>
+          <div class="formSection">
+            <!-- pw confim -->
+            <label for="pwConfirm">비밀번호 확인</label>
+            <input
+              type="password"
+              name="pwConfirm"
+              id="input-pwConfirm"
+              placeholder="비밀번호를 다시 입력하세요"
+            />
+            <div class="error-box"></div>
+          </div>
+          <div class="formSection">
+            <!-- submit -->
+            <button id="signup" type="submit" class="blue-purple-gradient">가입하기</button>
+          </div>
+        </form>
+      </div>
+      <div id="footer" class="centralize">
+        <!-- to signin -->
+        이미 계정이 있으신가요?
+        <a id="link" href="./signin.html">로그인하기</a>
+      </div>
+    </div>
+  </body>
 </html>
