@@ -32,8 +32,8 @@ homeworks/0409
 
 - [x] Sign up
 - [ ] Sign in
-- [x] Encrypted password
-  - [ ] Sign up
+- [ ] Encrypted password
+  - [x] Sign up
   - [ ] Sign in
 - [ ] Structured saving, based on localStorage
   - [x] auth:users
