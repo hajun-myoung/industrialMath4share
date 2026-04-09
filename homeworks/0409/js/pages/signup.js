@@ -93,11 +93,18 @@ document.addEventListener('DOMContentLoaded', () => {
       const result = await storage.newUser(id, pw);
     } catch (err) {
       alert(err);
+      return;
     }
 
     e_id.value = '';
     e_pw.value = '';
     e_pwConfirm.value = '';
-    console.log('singed up');
+
+    alert(
+      '회원가입이 완료되었습니다 :) 확인 버튼을 누르시면 자동으로 로그인 페이지로 이동하니, 기다려주세요.',
+    );
+    window.location.href = './signin.html';
+
+    return true;
   });
 });
