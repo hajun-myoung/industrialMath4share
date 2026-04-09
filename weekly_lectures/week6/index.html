@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      input {
+        /* border: None; */
+        border: 1px solid;
+        border-color: slategray;
+      }
+
+      .input-field {
+        display: flex;
+        gap: 1rem;
+      }
+
+      /* .login-form {
+        display: grid;
+        grid-template-columns: 2fr 3fr;
+      } */
+    </style>
+  </head>
+  <body>
+    <!-- <form class="login-form" style="display: flex; flex-direction: column; row-gap: 1rem"> -->
+    <form class="login-form">
+      <div class="input-field">
+        <label for="name">이름</label>
+        <input type="text" id="name" placeholder="깔깔 보더가 없지롱" />
+      </div>
+      <div class="input-field">
+        <label for="password">PW</label>
+        <input type="password" id="password" placeholder="깔깔 보더가 없지롱" />
+      </div>
+      <div>
+        <label for="password">PW 췤</label>
+        <input type="password" id="password2" placeholder="과연 똑같이 입력할 수 있을까" />
+      </div>
+      <div class="input-field">
+        <label for="stRadio">라디오</label>
+        <input type="radio" name="stRadio" id="one" value="one" />
+        <input type="radio" name="stRadio" id="two" value="two" />
+        <input type="radio" name="stRadio" id="three" value="three" />
+        <input type="radio" name="stRadio" id="four" value="four" />
+      </div>
+      <div class="input-field">
+        <label for="ckbx">체크박스</label>
+        <input type="checkbox" name="ckbx" id="one" value="one" />
+        <input type="checkbox" name="ckbx" id="two" value="two" />
+        <input type="checkbox" name="ckbx" id="three" value="three" />
+        <input type="checkbox" name="ckbx" id="four" value="four" />
+      </div>
+
+      <div>
+        <button id="confirmation">확인</button>
+        <button id="canceling" type="button">취소</button>
+      </div>
+    </form>
+
+    <script>
+      const form = document.querySelector('.login-form');
+      const confirmBtn = document.getElementById('confirmation');
+      const cancelBtn = document.getElementById('canceling');
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        console.log('form Event');
+        const name = document.getElementById('name');
+        const password = document.getElementById('password');
+        const passwordConfirmation = document.getElementById('password2');
+        console.log('usernae: ', name.value);
+        console.log('password: ', password.value);
+        console.log('패스워드를 콘솔에 찍다니 🚨 비상비상 🚨');
+        if (password.value === passwordConfirmation.value) {
+          console.log('ok');
+          alert('ㅇㅋ 환영합니다');
+          localStorage.setItem(
+            'account',
+            JSON.stringify({ username: name.value, password: password.value }),
+          );
+        } else {
+          console.log('incorrect');
+          alert('비밀번호 확인이 틀렸습니다');
+        }
+        console.log('form event: ', e);
+      });
+    </script>
+  </body>
+</html>

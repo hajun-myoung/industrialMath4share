@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      input {
+        /* border: None; */
+        border: 1px solid;
+        border-color: slategray;
+      }
+
+      .input-field {
+        display: flex;
+        gap: 1rem;
+      }
+
+      /* .login-form {
+        display: grid;
+        grid-template-columns: 2fr 3fr;
+      } */
+    </style>
+  </head>
+  <body>
+    <!-- <form class="login-form" style="display: flex; flex-direction: column; row-gap: 1rem"> -->
+    <form class="login-form">
+      <div class="input-field">
+        <label for="name">이름</label>
+        <input type="text" id="name" placeholder="깔깔 보더가 없지롱" />
+      </div>
+      <div class="input-field">
+        <label for="password">PW</label>
+        <input type="password" id="password" placeholder="깔깔 보더가 없지롱" />
+      </div>
+
+      <div>
+        <button id="confirmation">확인</button>
+        <button id="canceling" type="button">취소</button>
+      </div>
+    </form>
+
+    <script>
+      const form = document.querySelector('.login-form');
+      const confirmBtn = document.getElementById('confirmation');
+      const cancelBtn = document.getElementById('canceling');
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        console.log('form Event');
+        const name = document.getElementById('name');
+        const password = document.getElementById('password');
+        const savedPw = localStorage.getItem('pw');
+
+        if (password.value === savedPw) {
+          console.log('ok');
+          alert('ㅇㅋ 환영합니다');
+          localStorage.setItem('id', name.value);
+          localStorage.setItem('pw', password.value);
+        } else {
+          console.log('incorrect');
+          alert('정지 정지 정지! 손들어 움직이면 쏜다!');
+        }
+        console.log('form event: ', e);
+      });
+    </script>
+  </body>
+</html>
