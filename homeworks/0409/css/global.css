@@ -125,3 +125,11 @@ body {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
+#version {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  padding: 10px;
+  color: white;
+}
