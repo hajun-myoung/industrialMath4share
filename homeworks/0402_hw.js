@@ -7,6 +7,9 @@ function generateRandomString(length = 10) {
  * NOTE: toString method returns just stringify something
  * But when it use 36 as a optinoal instance
  * this method returns 36-base incorded string transfer result
+ *
+ * FIXME: required - including 0-9, a-z, A-Z
+ * but base36 doesn't use upper characters
  */
 
 function generateRandomStringMinMax(min = 2, max = 10) {
