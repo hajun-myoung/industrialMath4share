@@ -1,3 +1,5 @@
+import { getUsers, saveUsers } from './auth.js';
+
 /**
  * @param {String} text
  * @returns HashedPasswrod: String
@@ -19,13 +21,23 @@ async function hashString(text) {
  * @returns
  */
 export async function newUser(email, password) {
+  const users = getUsers();
+
+  const exists = users.some((user) => user.email === email);
+  if (exists) {
+    throw new Error('이미 존재하는 이메일입니다');
+  }
+
   const hashed_password = await hashString(password);
+
   const newUser = {
     email,
     password: hashed_password,
     createdAt: new Date().toISOString(),
   };
 
-  localStorage.setItem('auth:user', JSON.stringify(newUser));
+  users.push(newUser);
+  saveUsers(users);
+
   return true;
 }

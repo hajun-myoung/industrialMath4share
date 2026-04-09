@@ -89,9 +89,10 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    const result = await storage.newUser(id, pw);
-    if (!result) {
-      alert('오류가 발생했습니다. 개발자에게 문의하세요.');
+    try {
+      const result = await storage.newUser(id, pw);
+    } catch (err) {
+      alert(err);
     }
 
     e_id.value = '';
