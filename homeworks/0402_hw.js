@@ -41,7 +41,10 @@ function arrayFunc(array, func) {
 
 function generatUsers(length = 2) {
   return Array.from({ length }, () => {
-    return generateMail((max = 10));
+    return {
+      username: generateRandomStringMinMax(2, 8),
+      email: generateMail((max = 10)),
+    };
   });
 }
 
