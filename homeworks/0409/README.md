@@ -30,11 +30,20 @@ homeworks/0409
 
 ## Features
 
-- [ ] Sign up
+- [x] Sign up
 - [ ] Sign in
-- [ ] Encrypted password
+- [x] Encrypted password
+  - [ ] Sign up
+  - [ ] Sign in
 - [ ] Structured saving, based on localStorage
-  - [ ] auth:user
+  - [x] auth:users
   - [ ] auth:session
 - [ ] Session based state managing
-- [ ] Validating inputs, thorwing errors
+- [x] Validating inputs, thorwing errors
+
+## CAUTION: Auth
+
+User data is stored as an array under `auth:users` in localStorage, allowing multiple accounts and duplicate email validation
+
+This logic is not the best way to secure user information  
+But still a good way to simple-static-web
