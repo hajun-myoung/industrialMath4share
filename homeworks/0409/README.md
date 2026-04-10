@@ -47,3 +47,10 @@ User data is stored as an array under `auth:users` in localStorage, allowing mul
 
 This logic is not the best way to secure user information  
 But still a good way to simple-static-web
+
+## Flow
+
+1. User signs up -> data stored in localStorage
+2. User signs in -> credentials validated
+3. On success -> session stored -> redirect to welcome page
+4. On logout -> session removed
