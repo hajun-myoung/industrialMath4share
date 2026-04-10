@@ -4,26 +4,6 @@ import { showError } from '../util/auth.js';
 
 console.log('Signup Script Has Benn Loaded');
 
-/**
- * @param {HTMLElement} errorBox
- */
-function hideError(errorBox) {
-  errorBox.style.height = `${errorBox.scrollHeight}px`;
-
-  requestAnimationFrame(() => {
-    errorBox.style.height = '0px';
-    errorBox.style.opacity = '0';
-    errorBox.style.paddingTop = '0px';
-    errorBox.style.paddingBottom = '0px';
-  });
-
-  setTimeout(() => {
-    errorBox.textContent = '';
-  }, 350);
-
-  return true;
-}
-
 document.addEventListener('DOMContentLoaded', () => {
   const e_id = document.getElementById('input-id');
   const e_pw = document.getElementById('input-pw');

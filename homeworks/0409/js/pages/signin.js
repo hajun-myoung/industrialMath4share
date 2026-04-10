@@ -11,7 +11,9 @@ async function signin(id, pw) {
   const users = getUsers();
   const hashedPasswrod = await hashString(pw);
 
-  const selected_users = users.filter((user) => user.id === id)[0];
+  const selected_users = users.filter((user) => user.email === id);
+  console.log(users);
+  console.log(selected_users);
 
   if (selected_users.length === 0) {
     throw new Error('가입되지 않은 사용자입니다');
@@ -21,6 +23,7 @@ async function signin(id, pw) {
 
   const user = selected_users[0];
   if (user.password !== hashedPasswrod) {
+    console.log(user.password, hashedPasswrod);
     throw new Error('비밀번호가 일치하지 않습니다');
   }
 
@@ -28,21 +31,27 @@ async function signin(id, pw) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const e_id = document.getElementById('id');
-  const e_pw = document.getElementById('pw');
+  const e_id = document.getElementById('input-id');
+  const e_pw = document.getElementById('input-pw');
   const e_signinBtn = document.getElementById('signin');
   const e_signinError = document.querySelector('#formWrapper > form > div:nth-child(3) > div');
 
-  const id = e_id.value;
-  const pw = e_pw.value;
-
   e_signinBtn.addEventListener('click', async (e) => {
     e.preventDefault();
+    const id = e_id.value;
+    const pw = e_pw.value;
 
+    let isSigninSuccess = false;
     try {
-      const isSigninSuccess = await signin(id, pw);
+      isSigninSuccess = await signin(id, pw);
     } catch (err) {
-      showError(e_signinError, `🚨 비밀번호가 틀렸습니다`);
+      showError(e_signinError, `🚨 ${err}`);
+    }
+
+    if (isSigninSuccess) {
+      window.location.href = './welcome.html';
+    } else {
+      return false;
     }
   });
 });

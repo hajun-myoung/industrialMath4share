@@ -1,5 +1,25 @@
 const STORAGE_KEY = 'auth:users';
 
+/**
+ * @param {HTMLElement} errorBox
+ */
+function hideError(errorBox) {
+  errorBox.style.height = `${errorBox.scrollHeight}px`;
+
+  requestAnimationFrame(() => {
+    errorBox.style.height = '0px';
+    errorBox.style.opacity = '0';
+    errorBox.style.paddingTop = '0px';
+    errorBox.style.paddingBottom = '0px';
+  });
+
+  setTimeout(() => {
+    errorBox.textContent = '';
+  }, 350);
+
+  return true;
+}
+
 export function getUsers() {
   const data = localStorage.getItem(STORAGE_KEY);
   return data ? JSON.parse(data) : [];
@@ -28,7 +48,7 @@ export async function hashString(text) {
  * @param {HTMLElement} errorBox
  * @param {String} message
  */
-function showError(errorBox, message) {
+export function showError(errorBox, message) {
   errorBox.textContent = message;
   errorBox.style.paddingTop = '10px';
   errorBox.style.paddingBottom = '10px';
