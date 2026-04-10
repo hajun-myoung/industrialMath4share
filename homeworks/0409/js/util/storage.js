@@ -1,8 +1,8 @@
 import { getUsers, saveUsers, hashString } from './auth.js';
 
 const SESSION_KEY = 'auth:session';
-// const SESSION_EXPIRE_MS = 2 * 60 * 60 * 1000;
-const SESSION_EXPIRE_MS = 5 * 1000;
+const SESSION_EXPIRE_MS = 2 * 60 * 60 * 1000;
+// const SESSION_EXPIRE_MS = 5 * 1000;
 
 /**
  * @param {String} email
