@@ -31,14 +31,14 @@ homeworks/0409
 ## Features
 
 - [x] Sign up
-- [ ] Sign in
-- [ ] Encrypted password
+- [x] Sign in
+- [x] Encrypted password
   - [x] Sign up
-  - [ ] Sign in
-- [ ] Structured saving, based on localStorage
+  - [x] Sign in
+- [x] Structured saving, based on localStorage
   - [x] auth:users
-  - [ ] auth:session
-- [ ] Session based state managing
+  - [x] auth:session
+- [x] Session based state managing
 - [x] Validating inputs, thorwing errors
 
 ## CAUTION: Auth
