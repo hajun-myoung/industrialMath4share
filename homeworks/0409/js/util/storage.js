@@ -1,5 +1,9 @@
 import { getUsers, saveUsers, hashString } from './auth.js';
 
+const SESSION_KEY = 'auth:session';
+// const SESSION_EXPIRE_MS = 2 * 60 * 60 * 1000;
+const SESSION_EXPIRE_MS = 5 * 1000;
+
 /**
  * @param {String} email
  * @param {String} password
@@ -25,4 +29,17 @@ export async function newUser(email, password) {
   saveUsers(users);
 
   return true;
+}
+
+/**
+ * @param {{email: String, signedAt: String}} session
+ */
+export function isSessionExpired(session) {
+  if (!session.signedAt) return true;
+
+  const signedInTime = new Date(session.signedAt).getTime();
+  const now = new Date().getTime();
+
+  console.log(now - signedInTime);
+  return now - signedInTime > SESSION_EXPIRE_MS;
 }
