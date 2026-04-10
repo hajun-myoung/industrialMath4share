@@ -67,7 +67,7 @@ body {
   font-size: 14px;
 }
 
-#wrapper #formWrapper .formSection button {
+#wrapper button {
   display: block;
   width: 100%;
   height: 48px;
@@ -126,4 +126,8 @@ body {
   right: 0px;
   padding: 10px;
   color: white;
+}
+
+.flex-column {
+  flex-direction: column;
 }

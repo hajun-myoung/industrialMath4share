@@ -3,7 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>0409 Homework</title>
+    <title>0409: Welcome</title>
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/pages/welcome.css" />
+    <script type="module" src="js/pages/welcome.js"></script>
   </head>
-  <body></body>
+  <body class="centralize">
+    <div id="wrapper">
+      <div class="card-title centralize bold-text">환영합니다!</div>
+      <div class="card-content centralize flex-column">
+        <div>로그인에 성공하셨습니다.</div>
+        <div>현재 로그인된 계정: <span id="user-info" />님</div>
+      </div>
+      <div>
+        <button id="signout">로그아웃</button>
+      </div>
+    </div>
+  </body>
 </html>

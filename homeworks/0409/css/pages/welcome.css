@@ -1,0 +1,9 @@
+.card-content {
+  margin: 24px 0px;
+  font-family: 'Courier New', Courier, monospace;
+  color: gray;
+}
+
+button#signout {
+  background-color: rgb(255, 68, 0);
+}
