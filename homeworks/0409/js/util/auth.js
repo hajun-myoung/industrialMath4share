@@ -1,4 +1,5 @@
 const STORAGE_KEY = 'auth:users';
+const SESSION_KEY = 'auth:session';
 
 /**
  * @param {HTMLElement} errorBox
@@ -67,4 +68,31 @@ export function showError(errorBox, message) {
   }, 3000);
 
   return true;
+}
+
+/**
+ *
+ * @param {{email: String}} user
+ */
+export function setSignin(user) {
+  localStorage.setItem(
+    SESSION_KEY,
+    JSON.stringify({
+      email: user.email,
+      signedAt: new Date().toISOString(),
+    }),
+  );
+}
+
+function getSignin() {
+  const session = localStorage.getItem(SESSION_KEY);
+  return session ? JSON.parse(session) : null;
+}
+
+export function clearSignin() {
+  localStorage.removeItem(SESSION_KEY);
+}
+
+export function isSignedIn() {
+  return getSignin() !== null;
 }
