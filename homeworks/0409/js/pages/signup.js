@@ -1,32 +1,8 @@
 import * as validation from '../util/validation.js';
 import * as storage from '../util/storage.js';
+import { showError } from '../util/auth.js';
 
 console.log('Signup Script Has Benn Loaded');
-
-/**
- * @param {HTMLElement} errorBox
- * @param {String} message
- */
-function showError(errorBox, message) {
-  errorBox.textContent = message;
-  errorBox.style.paddingTop = '10px';
-  errorBox.style.paddingBottom = '10px';
-  errorBox.style.opacity = '1';
-
-  errorBox.style.height = 'auto';
-  const targetHeight = errorBox.scrollHeight;
-  errorBox.style.height = '0px';
-
-  requestAnimationFrame(() => {
-    errorBox.style.height = `${targetHeight}px`;
-  });
-
-  setTimeout(() => {
-    hideError(errorBox);
-  }, 3000);
-
-  return true;
-}
 
 /**
  * @param {HTMLElement} errorBox
