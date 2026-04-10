@@ -84,7 +84,7 @@ export function setSignin(user) {
   );
 }
 
-function getSignin() {
+export function getSignin() {
   const session = localStorage.getItem(SESSION_KEY);
   return session ? JSON.parse(session) : null;
 }

@@ -1,4 +1,4 @@
-import { getUsers, hashString, showError } from '../util/auth.js';
+import * as auth from '../util/auth.js';
 
 console.log('Signin Scripts Has Been Loaded');
 
@@ -8,8 +8,8 @@ console.log('Signin Scripts Has Been Loaded');
  * @returns isSigninSuccess(boolean)
  */
 async function signin(id, pw) {
-  const users = getUsers();
-  const hashedPasswrod = await hashString(pw);
+  const users = auth.getUsers();
+  const hashedPasswrod = await auth.hashString(pw);
 
   const selected_users = users.filter((user) => user.email === id);
   console.log(users);
@@ -45,10 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       isSigninSuccess = await signin(id, pw);
     } catch (err) {
-      showError(e_signinError, `🚨 ${err}`);
+      auth.showError(e_signinError, `🚨 ${err}`);
     }
 
     if (isSigninSuccess) {
+      auth.setSignin({ email: id });
       window.location.href = './welcome.html';
     } else {
       return false;

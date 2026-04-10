@@ -9,4 +9,13 @@ document.addEventListener('DOMContentLoaded', () => {
     alert('로그인이 필요한 페이지입니다');
     window.location.href = './signin.html';
   }
+
+  const e_userInfo = document.getElementById('user-info');
+  const user = auth.getSignin();
+
+  try {
+    e_userInfo.innerText = user.email.split('@')[0];
+  } catch (err) {
+    console.log(err);
+  }
 });
