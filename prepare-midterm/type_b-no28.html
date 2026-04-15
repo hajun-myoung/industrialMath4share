@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="form" action="">
+      <div class="formSection">
+        <label for="id">이메일</label>
+        <input type="text" id="input-id" name="id" placeholder="your@email.com" />
+      </div>
+      <div class="formSection">
+        <label for="pw">비밀번호</label>
+        <input type="password" id="input-pw" placeholder="비밀번호를 입력하세요" name="pw" />
+      </div>
+      <div class="formSection">
+        <button id="signin" type="submit" class="blue-purple-gradient">로그인</button>
+        <div class="error-box"></div>
+      </div>
+    </form>
+
+    <script>
+      const btn = document.getElementById('signin');
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = document.getElementById('input-id').value;
+        const pw = document.getElementById('input-pw').value;
+
+        console.log(`사용자: ${id}, 비밀번호: ${pw}`);
+      });
+    </script>
+  </body>
+</html>
