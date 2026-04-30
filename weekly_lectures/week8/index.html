@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      function addImage(url) {
+        const request = new XMLHttpRequest();
+        request.open('GET', url);
+        request.responseType = 'blob';
+
+        request.addEventListener('load', () => {
+          if (request.status == 200) {
+            const response = request.response;
+            const blob = new Blob([response], { type: 'image/png' });
+            const img = document.createElement('img');
+            img.src = window.URL.createObjectURL(blob);
+            img.onload = () => URL.revokeObjectURL(img.src);
+            img.classList.add('col-sm-6', 'col-md-4', 'col-lg-3', 'mb-2');
+            document.getElementById('images').appendChild(img);
+          } else {
+            console.log(`${request.status}: ${request.statusText}`);
+          }
+        });
+        request.addEventListener('error', (event) => console.log('Network error'));
+        request.send();
+      }
+    </script>
+  </head>
+  <body>
+    <script>
+      images = [
+        'eclair-3366430_1280.jpg',
+        'creme-brulee-3490886_1280.jpg',
+        'strawberry-dessert-2191973_1280.jpg',
+        'macarons-2897881_1280.jpg',
+      ];
+
+      addImage('images/' + images[0]);
+      addImage('images/' + images[1]);
+      addImage('images/' + images[2]);
+      addImage('images/' + images[3]);
+    </script>
+  </body>
+</html>
