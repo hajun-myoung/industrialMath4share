@@ -1,0 +1,23 @@
+info:
+  name: Create a menu
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: http://localhost:3000/api/menus
+  body:
+    type: json
+    data: |-
+      {
+        "name": "아메리카노",
+        "price": 4500,
+        "category": "coffee"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
