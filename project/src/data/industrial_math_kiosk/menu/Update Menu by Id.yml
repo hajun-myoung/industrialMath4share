@@ -1,0 +1,26 @@
+info:
+  name: Update Menu by Id
+  type: http
+  seq: 1
+
+http:
+  method: PUT
+  url: http://localhost:3000/api/menus/2xQ38vGm0B7lv7iHefG9_
+  body:
+    type: json
+    data: |-
+      {
+            "name": "{\"kor\":\"밀크티\",\"eng\":\"Milk Tea\",\"esp\":\"Té con leche\"}",
+          "price": 5000,
+          "category": "coffee",
+          "createdAt": 1778246136500,
+          "image": ""
+
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
