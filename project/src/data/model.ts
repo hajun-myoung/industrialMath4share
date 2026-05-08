@@ -46,16 +46,23 @@ export interface OrderDetailResponse {
   quantity: number;
   createdAt: string;
 }
+
+// Update: menuName i18n
+type LanguageCode = 'kor' | 'eng' | 'esp';
+export interface MenuName {
+  menuname: Partial<Record<LanguageCode, string>>;
+}
+
 export interface MenuResponse {
   id: string;
-  name: string;
+  name: MenuName;
   price: number;
   category: string;
   createdAt: string;
   image?: string;
 }
 export interface MenuInput {
-  name: string;
+  name: MenuName;
   price: number;
   category: string;
   image?: string;

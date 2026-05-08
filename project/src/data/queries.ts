@@ -1,13 +1,20 @@
-import db, { type MenuResponse, type OrderDetailResponse, type Order } from './model.js';
+import db, {
+  type MenuResponse,
+  type OrderDetailResponse,
+  type Order,
+  type MenuName,
+} from './model.js';
 const TABLE_NAMES = {
   menus: 'menus',
   orders: 'orders',
   order_details: 'order_details',
 };
+
 // menu
+// Update: Menu i18n
 const createMenu = (
   menuId: string,
-  menuName: string,
+  menuName: MenuName,
   price: number,
   category: string,
   createdAt: number,
@@ -23,7 +30,9 @@ const createMenu = (
     price, category, created_at AS createdAt, image 
   `,
     )
-    .get(menuId, menuName, price, category, createdAt, image ?? '') as MenuResponse | undefined;
+    .get(menuId, JSON.stringify(menuName), price, category, createdAt, image ?? '') as
+    | MenuResponse
+    | undefined;
 const getAllMenus = () =>
   db
     .prepare(
