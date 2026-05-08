@@ -43,7 +43,7 @@ const getAllMenus = () =>
   `,
     )
     .all() as unknown as MenuResponse[];
-const getMenuByMenuId = (menuId: string) =>
+const getMenuByMenuId = (menuId: MenuName) =>
   db
     .prepare(
       `
@@ -52,7 +52,7 @@ const getMenuByMenuId = (menuId: string) =>
   FROM ${TABLE_NAMES.menus} WHERE menu_id = ?
   `,
     )
-    .get(menuId) as unknown as MenuResponse;
+    .get(JSON.stringify(menuId)) as unknown as MenuResponse;
 const removeMenuById = (menuId: string) => {
   db.exec(`
     DELETE FROM ${TABLE_NAMES.menus} WHERE menu_id='${menuId}'
@@ -85,7 +85,7 @@ const createOrder = (orderId: string, totalPrice: number, orderedAt: number) => 
 // order detail
 const createOrderDetail = (
   orderDetailId: string,
-  menuName: string,
+  menuName: MenuName,
   price: number,
   quantity: number,
   createdAt: number,
@@ -102,7 +102,7 @@ const createOrderDetail = (
     )
     .get(
       orderDetailId,
-      menuName,
+      JSON.stringify(menuName),
       price,
       quantity,
       createdAt,
