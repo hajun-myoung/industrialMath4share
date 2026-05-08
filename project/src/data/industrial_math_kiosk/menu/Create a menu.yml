@@ -10,9 +10,13 @@ http:
     type: json
     data: |-
       {
-        "name": "아메리카노",
-        "price": 4500,
-        "category": "coffee"
+        "name": {
+          "kor": "히비스커스티",
+          "eng": "Hibiscus Tea",
+          "esp": "Té de hibisco"
+        },
+        "price": 5000,
+        "category": "tea"
       }
   auth: inherit
 
