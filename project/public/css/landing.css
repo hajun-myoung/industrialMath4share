@@ -2,3 +2,69 @@
   font-size: 2em;
   font-weight: bold;
 }
+
+#main-selector {
+  margin: 40% 0 50% 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+#main-selector .box-selector {
+  width: 40%;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #efefef;
+  border-radius: 20px;
+  flex-direction: column;
+}
+
+#main-selector .box-selector div {
+  margin-top: 5px;
+}
+
+#languages {
+  bottom: 20px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  /* background-color: red; */
+}
+
+#languages #button-wrapper {
+  width: 75%;
+  display: flex;
+  justify-content: space-evenly;
+  /* background-color: blue; */
+}
+
+#languages #button-wrapper div {
+  width: 60px;
+  height: 60px;
+  background-color: #efefef;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.lang-buttons {
+  opacity: 0.45;
+  transform: scale(1);
+}
+
+.lang-buttons.selected {
+  opacity: 1;
+  transform: scale(1.08);
+  border: 3px #3182f6 solid;
+}

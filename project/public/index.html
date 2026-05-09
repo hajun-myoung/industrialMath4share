@@ -6,6 +6,8 @@
     <title>Merry Latte</title>
     <link rel="stylesheet" href="index.css" />
     <link rel="stylesheet" href="css/landing.css" />
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
+    <script src="js/landing.js"></script>
   </head>
   <body>
     <div class="kiosk-shell">
@@ -14,14 +16,28 @@
           <div class="welcome-title">반가워요</div>
           <div class="welcome-title">주문을 시작할게요</div>
         </div>
-        <div>
-          <div>먹고가요</div>
-          <div>포장할게요</div>
+        <div id="main-selector">
+          <div class="box-selector">
+            <iconify-icon icon="noto:cup-with-straw" width="60"></iconify-icon>
+            <div>먹고가요</div>
+          </div>
+          <div class="box-selector">
+            <iconify-icon icon="noto:shopping-bags" width="60"></iconify-icon>
+            <div>포장할게요</div>
+          </div>
         </div>
         <div id="languages">
-          <div>kor</div>
-          <div>eng</div>
-          <div>esp</div>
+          <div id="button-wrapper">
+            <div id="button-korean" class="lang-buttons" data-lang="kor">
+              <iconify-icon icon="flag:kr-4x3" width="40"></iconify-icon>
+            </div>
+            <div id="button-english" class="lang-buttons" data-lang="eng">
+              <iconify-icon icon="flag:us-4x3" width="40"></iconify-icon>
+            </div>
+            <div id="button-spanish" class="lang-buttons" data-lang="esp">
+              <iconify-icon icon="flag:es-4x3" width="40"></iconify-icon>
+            </div>
+          </div>
         </div>
       </div>
     </div>
