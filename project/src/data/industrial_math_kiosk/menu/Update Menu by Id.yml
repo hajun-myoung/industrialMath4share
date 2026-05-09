@@ -5,18 +5,17 @@ info:
 
 http:
   method: PUT
-  url: http://localhost:3000/api/menus/2xQ38vGm0B7lv7iHefG9_
+  url: http://localhost:3000/api/menus/AuPO-saBPJWrP-MeAupre
   body:
     type: json
-    data: |-
-      {
-            "name": "{\"kor\":\"밀크티\",\"eng\":\"Milk Tea\",\"esp\":\"Té con leche\"}",
-          "price": 5000,
-          "category": "coffee",
-          "createdAt": 1778246136500,
+    data: |2-
+        {
+          "name": "{\"kor\":\"에스메랄다 푼다도르 게샤\",\"eng\":\"Esmeralda Fundador Geisha Natural\",\"esp\":\"Geisha Natural Esmeralda Fundador\"}",
+          "price": 19000,
+          "category": "Brewing Coffee",
+          "createdAt": 1778311945632,
           "image": ""
-
-      }
+        }
   auth: inherit
 
 settings:

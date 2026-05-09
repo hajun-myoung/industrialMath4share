@@ -11,12 +11,12 @@ http:
     data: |-
       {
         "name": {
-          "kor": "히비스커스티",
-          "eng": "Hibiscus Tea",
-          "esp": "Té de hibisco"
+          "kor":"에스메랄다 푼다도르 게샤",
+          "eng":"Esmeralda Fundador Geisha Natural",
+          "esp":"Geisha Natural Esmeralda Fundador"
         },
-        "price": 5000,
-        "category": "tea"
+        "price": 18000,
+        "category": "Brewing Coffee"
       }
   auth: inherit
 
