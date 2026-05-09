@@ -1,3 +1,58 @@
-.header {
-  height: 3rem;
+* {
+  box-sizing: border-box;
+}
+
+/* common styles */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Segoe UI', sans-serif;
+  background: #f8fafc;
+  color: #191f28;
+}
+
+/* html only styles */
+html {
+  background-color: crimson;
+  min-height: 100vh;
+  height: 100vh;
+}
+
+/* body only styles */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+}
+
+.kiosk-shell {
+  position: relative;
+  width: min(92vw, 520px);
+  aspect-ratio: 776 / 1436; /* kiosk-shell image ratio */
+
+  background-image: url('./assets/images/kiosk-shell.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.kiosk-screen {
+  position: absolute;
+
+  top: 8%;
+  left: 13.8%;
+  width: 71.7%;
+  height: 69.7%;
+
+  padding: 20px;
+  padding-top: 40px;
+  background-color: white;
+  border: 1px black solid;
+  border-radius: 20px;
+
+  /* area testing color */
+  /* background-color: red; */
 }
