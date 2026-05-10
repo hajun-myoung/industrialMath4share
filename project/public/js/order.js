@@ -123,4 +123,20 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     menuArea.appendChild(newSection);
   });
+
+  // navigation bar - scrolling
+  const scrollArea = document.querySelector('#menu-scroll-area');
+  const tabButtons = document.querySelectorAll('.category');
+
+  tabButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const targetId = button.dataset.target;
+      const targetSection = document.getElementById(targetId);
+
+      targetSection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    });
+  });
 });
