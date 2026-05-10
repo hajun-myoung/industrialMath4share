@@ -82,14 +82,27 @@ body {
   font-weight: 900;
   font-style: italic;
 
-  line-height: 0.95;
+  line-height: 1.05;
   letter-spacing: -0.06em;
   overflow: hidden;
-  transform: translateX(-4vw);
+  /* transform: translateX(vw); */
 }
 
 .brand-copy-line span {
   color: rgba(25, 31, 40, 0.94);
+}
+
+.brand-footer-line {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.brand-footer-line span {
+  margin-left: 1vw;
+  color: rgba(25, 31, 40, 0.94);
+  letter-spacing: 0em;
+  font-size: clamp(40px, 1vw, 60px);
 }
 
 .brand-copy-line span.brand-blue {
