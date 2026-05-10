@@ -5,16 +5,16 @@ info:
 
 http:
   method: PUT
-  url: http://localhost:3000/api/menus/AuPO-saBPJWrP-MeAupre
+  url: http://localhost:3000/api/menus/iw7panqZDliFaFIuX0so8
   body:
     type: json
     data: |2-
         {
-          "name": "{\"kor\":\"에스메랄다 푼다도르 게샤\",\"eng\":\"Esmeralda Fundador Geisha Natural\",\"esp\":\"Geisha Natural Esmeralda Fundador\"}",
-          "price": 19000,
-          "category": "Brewing Coffee",
-          "createdAt": 1778311945632,
-          "image": ""
+          "name": "{\"kor\":\"아메리카노\",\"eng\":\"Americano\",\"esp\":\"Café americano\"}",
+          "price": 4500,
+          "category": "coffee",
+          "createdAt": 1778245991925,
+          "image": "https://images.ctfassets.net/v601h1fyjgba/1vlXSpBbgUo9yLzh71tnOT/a1afdbe54a383d064576b5e628035f04/Iced_Americano.jpg"
         }
   auth: inherit
 
