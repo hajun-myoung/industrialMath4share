@@ -1,22 +1,26 @@
-console.log('index.js');
+document.addEventListener('DOMContentLoaded', () => {
+  const langButtons = [...document.getElementsByClassName('lang-buttons')];
+  const savedLanguage = localStorage.getItem('selectedLanguage') || 'ko';
 
-const getAllMenus = async () => {
-  const res = await fetch(`/api/menus`);
-  const menus = await res.json();
-  return menus;
-};
+  langButtons.forEach((button) => {
+    if (button.dataset.lang === savedLanguage) {
+      button.classList.add('selected');
+    }
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const menuList = document.getElementById('menuList');
-  const menus = (await getAllMenus()) ?? [];
+    button.addEventListener('click', () => {
+      const selectedLanguage = button.dataset.lang;
+      localStorage.setItem('selectedLanguage', selectedLanguage);
 
-  menus.forEach((menu) => {
-    const menu_element = document.createElement('div');
-    menu_element.innerHTML = `
-    <div>${menu.name}</div>
-    <div>${menu.price}원</div>
-    `;
+      langButtons.forEach((button) => button.classList.remove('selected'));
+      button.classList.add('selected');
+    });
+  });
 
-    menuList.appendChild(menu_element);
+  const isTogoButtons = [...document.getElementsByClassName('box-selector')];
+
+  isTogoButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      window.location.href = './pages/order.html';
+    });
   });
 });

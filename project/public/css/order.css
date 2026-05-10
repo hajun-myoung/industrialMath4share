@@ -1,0 +1,27 @@
+/* override padding */
+.kiosk-screen {
+  padding: 10px;
+  padding-top: 20px;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+}
+
+header {
+  /* background-color: green; */
+  height: 5%;
+  display: flex;
+  justify-content: space-between;
+  color: gray;
+}
+
+header div {
+  display: flex;
+  align-items: center;
+}
+
+header > div > div > div {
+  margin-right: 10px;
+}

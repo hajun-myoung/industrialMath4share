@@ -4,14 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hola</title>
-    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="../index.css" />
+    <link rel="stylesheet" href="../css/order.css" />
+    <script src="../js/order.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
+    <script src="../index.js"></script>
   </head>
   <body>
-    <header class="header">
-      <a href="pages/admin.html">관리자</a>
-    </header>
-    <h1>¿Quires Café con leche?</h1>
-    <div class="menu-ist" id="menuList"></div>
-    <script src="index.js"></script>
+    <div class="kiosk-shell">
+      <div class="kiosk-screen">
+        <header>
+          <div>
+            <iconify-icon icon="ic:baseline-arrow-back" width="28"></iconify-icon>
+          </div>
+          <div>
+            <div id="lang-text"></div>
+            <div id="to-first">처음 화면으로</div>
+          </div>
+        </header>
+      </div>
+    </div>
   </body>
 </html>
