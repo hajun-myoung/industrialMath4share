@@ -24,9 +24,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const categories_ele = document.getElementById('categories');
   categories.forEach((category) => {
-    const newCategory = document.createElement('div');
+    const newCategory = document.createElement('button');
     newCategory.innerText = capitalizeWords(category);
     newCategory.className = 'category';
+    newCategory.dataset.target = category.toLowerCase();
     categories_ele.appendChild(newCategory);
   });
 
@@ -68,6 +69,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const toFirstButton = document.getElementById('to-first');
   toFirstButton.addEventListener('click', () => {
+    window.location.href = '../index.html';
+  });
+
+  // back button to go landing
+  const backButton = document.getElementById('backButton');
+  backButton.addEventListener('click', () => {
     window.location.href = '../index.html';
   });
 });

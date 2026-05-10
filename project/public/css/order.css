@@ -35,6 +35,19 @@ header > div > div > div {
 }
 
 #categories .category {
-  color: grey;
   margin-right: 24px;
+  font-size: 1em;
+  color: #8b95a1;
+  white-space: nowrap;
+
+  /** Diable default button styling */
+  background: none;
+  border: none;
+  appearance: none;
+  outline: none; /** Safari */
+}
+
+.menu-scroll-area {
+  flex: 1;
+  overflow-y: scroll;
 }
