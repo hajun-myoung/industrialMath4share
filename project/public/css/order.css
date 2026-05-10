@@ -47,6 +47,11 @@ header > div > div > div {
   outline: none; /** Safari */
 }
 
+#categories .category.active {
+  color: #191f28;
+  border-bottom: 3px solid #191f28;
+}
+
 #menu-scroll-area {
   flex: 1;
   overflow-y: scroll;
