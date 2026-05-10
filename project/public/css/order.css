@@ -29,16 +29,23 @@ header > div > div > div {
 #categories {
   display: flex;
   padding-top: 7%;
-  padding-bottom: 3%;
-  border-bottom: 3px #eaeaea solid;
+  /* padding-bottom: 3%; */
+  background-image: linear-gradient(#eaeaea, #eaeaea);
+  background-repeat: no-repeat;
+  background-size: 100% 3px;
+  background-position: left bottom;
   overflow-x: scroll;
 }
 
 #categories .category {
+  position: relative;
+
   margin-right: 24px;
   font-size: 1em;
   color: #8b95a1;
   white-space: nowrap;
+
+  padding: 3% 0;
 
   /** Diable default button styling */
   background: none;
@@ -49,7 +56,18 @@ header > div > div > div {
 
 #categories .category.active {
   color: #191f28;
-  border-bottom: 3px solid #191f28;
+  /* border-bottom: 2.5px solid #191f28; */
+}
+
+#categories .category.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background-color: #191f28;
+  z-index: 1;
 }
 
 #menu-scroll-area {
