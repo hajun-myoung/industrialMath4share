@@ -25,3 +25,16 @@ header div {
 header > div > div > div {
   margin-right: 10px;
 }
+
+#categories {
+  display: flex;
+  padding-top: 7%;
+  padding-bottom: 3%;
+  border-bottom: 3px #eaeaea solid;
+  overflow-x: scroll;
+}
+
+#categories .category {
+  color: grey;
+  margin-right: 24px;
+}

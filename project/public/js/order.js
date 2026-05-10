@@ -1,3 +1,5 @@
+import { capitalizeWords } from './utils.js';
+
 console.log('order.js');
 
 const getAllMenus = async () => {
@@ -7,8 +9,26 @@ const getAllMenus = async () => {
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
-  //   const menuList = document.getElementById('menuList');
-  //   const menus = (await getAllMenus()) ?? [];
+  const menuList = document.getElementById('menuList');
+  const menus = (await getAllMenus()) ?? [];
+
+  //   console.log(menus);
+  const categories = menus.reduce((categories, curr) => {
+    if (categories.includes(curr.category)) return categories;
+    else {
+      return [...categories, curr.category];
+    }
+  }, []);
+
+  //   console.log(categories);
+
+  const categories_ele = document.getElementById('categories');
+  categories.forEach((category) => {
+    const newCategory = document.createElement('div');
+    newCategory.innerText = capitalizeWords(category);
+    newCategory.className = 'category';
+    categories_ele.appendChild(newCategory);
+  });
 
   //   menus.forEach((menu) => {
   //     const menu_element = document.createElement('div');
