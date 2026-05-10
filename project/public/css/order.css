@@ -47,7 +47,51 @@ header > div > div > div {
   outline: none; /** Safari */
 }
 
-.menu-scroll-area {
+#menu-scroll-area {
   flex: 1;
   overflow-y: scroll;
+}
+
+#menu-scroll-area > section {
+  border-bottom: 3px rgb(233, 233, 233) dotted;
+  padding-bottom: 5%;
+}
+
+#menu-scroll-area h1 {
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.menu-card-image {
+  width: 100%;
+  aspect-ratio: 1;
+  background-color: rgb(227, 227, 227);
+  border-radius: 10px;
+}
+
+.menu-cards-wrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.menu-cards-wrapper > div {
+  width: calc((100% - 16px) / 3);
+}
+
+.menu-card {
+  padding-bottom: 12px;
+}
+
+.menu-card-name {
+  padding-top: 8px;
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.menu-card-price {
+  color: #8b95a1;
+  font-size: 0.9em;
+  padding-top: 4px;
 }
