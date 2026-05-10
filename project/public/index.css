@@ -9,13 +9,13 @@ body {
   padding: 0;
   width: 100%;
   font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Segoe UI', sans-serif;
-  background: #f8fafc;
+  /* background: #f8fafc; */
   color: #191f28;
+  background: linear-gradient(180deg, #fff 0%, #f6f8fb 10%, #f1f4f8 100%);
 }
 
 /* html only styles */
 html {
-  background-color: crimson;
   min-height: 100vh;
   height: 100vh;
 }
@@ -30,13 +30,15 @@ body {
 
 .kiosk-shell {
   position: relative;
-  width: min(92vw, 520px);
+  width: min(30vw, 520px);
   aspect-ratio: 776 / 1436; /* kiosk-shell image ratio */
 
   background-image: url('./assets/images/kiosk-shell.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+
+  z-index: 2;
 }
 
 .kiosk-screen {
@@ -58,4 +60,46 @@ body {
 
   /* area testing color */
   /* background-color: red; */
+}
+
+/* just for kidding, ad comments */
+.hero-layout {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-left: 6vw;
+  padding-right: 8vw;
+}
+
+.hero-copy {
+  flex: 1;
+
+  font-size: clamp(80px, 5vw, 120px);
+  font-weight: 900;
+  font-style: italic;
+
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+  overflow: hidden;
+  transform: translateX(-4vw);
+}
+
+.brand-copy-line span {
+  color: rgba(25, 31, 40, 0.94);
+}
+
+.brand-copy-line span.brand-blue {
+  color: #3182f6;
+  text-shadow: 0 0 24px rgba(34, 114, 235, 0.12);
+}
+
+.hero-kiosk {
+  width: min(34vw, 520px);
+
+  display: flex;
+  justify-content: center;
 }

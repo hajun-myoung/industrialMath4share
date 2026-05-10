@@ -10,36 +10,47 @@
     <script src="index.js"></script>
   </head>
   <body>
-    <div class="kiosk-shell">
-      <div class="kiosk-screen">
-        <div>
-          <div class="welcome-title">반가워요</div>
-          <div class="welcome-title">주문을 시작할게요</div>
+    <div class="hero-layout">
+      <section class="hero-copy">
+        <div class="brand-copy-line">
+          <span class="brand-blue">Merry Latte</span>
+          <br />
+          <span>당신을 위한 단 한 잔의 커피</span>
         </div>
-        <div id="main-selector">
-          <div class="box-selector">
-            <iconify-icon icon="noto:cup-with-straw" width="60"></iconify-icon>
-            <div>먹고가요</div>
-          </div>
-          <div class="box-selector">
-            <iconify-icon icon="noto:shopping-bags" width="60"></iconify-icon>
-            <div>포장할게요</div>
+      </section>
+      <section class="hero-kiosk">
+        <div class="kiosk-shell">
+          <div class="kiosk-screen">
+            <div>
+              <div class="welcome-title">반가워요</div>
+              <div class="welcome-title">주문을 시작할게요</div>
+            </div>
+            <div id="main-selector">
+              <div class="box-selector">
+                <iconify-icon icon="noto:cup-with-straw" width="60"></iconify-icon>
+                <div>먹고가요</div>
+              </div>
+              <div class="box-selector">
+                <iconify-icon icon="noto:shopping-bags" width="60"></iconify-icon>
+                <div>포장할게요</div>
+              </div>
+            </div>
+            <div id="languages">
+              <div id="button-wrapper">
+                <div id="button-korean" class="lang-buttons" data-lang="kor">
+                  <iconify-icon icon="flag:kr-4x3" width="40"></iconify-icon>
+                </div>
+                <div id="button-english" class="lang-buttons" data-lang="eng">
+                  <iconify-icon icon="flag:us-4x3" width="40"></iconify-icon>
+                </div>
+                <div id="button-spanish" class="lang-buttons" data-lang="esp">
+                  <iconify-icon icon="flag:es-4x3" width="40"></iconify-icon>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div id="languages">
-          <div id="button-wrapper">
-            <div id="button-korean" class="lang-buttons" data-lang="kor">
-              <iconify-icon icon="flag:kr-4x3" width="40"></iconify-icon>
-            </div>
-            <div id="button-english" class="lang-buttons" data-lang="eng">
-              <iconify-icon icon="flag:us-4x3" width="40"></iconify-icon>
-            </div>
-            <div id="button-spanish" class="lang-buttons" data-lang="esp">
-              <iconify-icon icon="flag:es-4x3" width="40"></iconify-icon>
-            </div>
-          </div>
-        </div>
-      </div>
+      </section>
     </div>
   </body>
 </html>
