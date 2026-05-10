@@ -5,16 +5,16 @@ info:
 
 http:
   method: PUT
-  url: http://localhost:3000/api/menus/iw7panqZDliFaFIuX0so8
+  url: http://localhost:3000/api/menus/9R8eA0jU-hpdWeTb0ReNK
   body:
     type: json
     data: |2-
         {
-          "name": "{\"kor\":\"아메리카노\",\"eng\":\"Americano\",\"esp\":\"Café americano\"}",
-          "price": 4500,
-          "category": "coffee",
-          "createdAt": 1778245991925,
-          "image": "https://images.ctfassets.net/v601h1fyjgba/1vlXSpBbgUo9yLzh71tnOT/a1afdbe54a383d064576b5e628035f04/Iced_Americano.jpg"
+          "name": "{\"kor\":\"인도네시아 만델링\",\"eng\":\"Mandheling\",\"esp\":\"Mandheling\"}",
+          "price": 6000,
+          "category": "Brewing Coffee",
+          "createdAt": 1778312189171,
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjoz2m_rQ7nS9HWQhEoBOjkdXI98QCKMW62g&s"
         }
   auth: inherit
 
