@@ -46,14 +46,14 @@ body {
 
   top: 8%;
   left: 13.8%;
-  width: 71.7%;
-  height: 69.7%;
+  width: 72%;
+  height: 70%;
 
   padding: 20px;
   padding-top: 40px;
   background-color: white;
   border: 1px black solid;
-  border-radius: 15px;
+  border-radius: 12px;
 
   display: flex;
   flex-direction: column;
