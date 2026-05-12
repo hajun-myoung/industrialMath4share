@@ -11,12 +11,13 @@ http:
     data: |-
       {
         "name": {
-          "kor":"에스메랄다 푼다도르 게샤",
-          "eng":"Esmeralda Fundador Geisha Natural",
-          "esp":"Geisha Natural Esmeralda Fundador"
+          "kor":"딸기 아사이 레모네이드 리프레셔",
+          "eng":"Strawberry Acai Lemonade Refresher",
+          "esp":"Refresher de Limonada, Fresa y Açaí"
         },
-        "price": 18000,
-        "category": "Brewing Coffee"
+        "price": 7200,
+        "category": "Ade/Smoothie",
+        "img": "https://joyfoodsunshine.com/wp-content/uploads/2019/01/strawberry-banana-smoothie-recipe-1x1-1.jpg"
       }
   auth: inherit
 

@@ -5,16 +5,16 @@ info:
 
 http:
   method: PUT
-  url: http://localhost:3000/api/menus/9R8eA0jU-hpdWeTb0ReNK
+  url: http://localhost:3000/api/menus/7v-Gu4gj4BDAhAp1Y20Iy
   body:
     type: json
     data: |2-
         {
-          "name": "{\"kor\":\"인도네시아 만델링\",\"eng\":\"Mandheling\",\"esp\":\"Mandheling\"}",
-          "price": 6000,
-          "category": "Brewing Coffee",
-          "createdAt": 1778312189171,
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjoz2m_rQ7nS9HWQhEoBOjkdXI98QCKMW62g&s"
+          "name": "{\"kor\":\"딸기 아사이 레모네이드 리프레셔\",\"eng\":\"Strawberry Acai Lemonade Refresher\",\"esp\":\"Refresher de Limonada, Fresa y Açaí\"}",
+          "price": 7200,
+          "category": "Ade/Smoothie",
+          "createdAt": 1778598672781,
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdWI0S18qJzi5u1vEgJXD0WZ2KNIJSrxkNVQ&s"
         }
   auth: inherit
 
