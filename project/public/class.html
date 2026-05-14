@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kiosk</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <header class="header"><button id="adminLoginBtn">관리자</button></header>
+    <h1>카페에 오신 걸 환영합니다.</h1>
+    <div>
+      <div class="menu-list" id="menuList"></div>
+      <div id="orderList"></div>
+    </div>
+    <div id="loginModal" class="login-modal">
+      <div class="login-content">
+        <form id="loginForm">
+          <div class="form-control">
+            <label for="username">사용자명</label>
+            <input type="text" id="username" />
+          </div>
+          <div class="form-control">
+            <label for="password">비밀번호</label>
+            <input type="password" id="password" />
+          </div>
+          <button type="submit">로그인</button>
+        </form>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>

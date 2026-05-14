@@ -1,0 +1,23 @@
+.header {
+  height: 3rem;
+  background-color: beige;
+}
+
+#loginModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+}
+
+.login-content {
+  background-color: white;
+  background-image: url('https://static.vecteezy.com/system/resources/thumbnails/004/957/542/small/camouflage-seamless-pattern-for-army-and-military-free-vector.jpg');
+  padding: 30px;
+}
