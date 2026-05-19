@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   const langButtons = [...document.getElementsByClassName('lang-buttons')];
-  const savedLanguage = localStorage.getItem('selectedLanguage') || 'ko';
+  if (!localStorage.getItem('selectedLanguage')) {
+    localStorage.setItem('selectedLanguage', 'kor');
+  }
+  const savedLanguage = localStorage.getItem('selectedLanguage') || 'kor';
 
   langButtons.forEach((button) => {
     if (button.dataset.lang === savedLanguage) {
