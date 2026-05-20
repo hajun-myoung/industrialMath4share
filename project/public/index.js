@@ -66,14 +66,16 @@ document.addEventListener('DOMContentLoaded', () => {
   adminForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    if (adminInputId !== 'admin') {
+    if (adminInputId.value !== 'admin') {
       alert('Wrong ID');
       window.location.href = '/index.html';
-    } else if (adminInputPw !== '1q2w3e4r') {
+    } else if (adminInputPw.value !== '1q2w3e4r') {
       alert('Wrong PW');
       window.location.href = '/index.html';
     } else {
-      window.location.href = '/admin.html';
+      adminInputId.value = '';
+      adminInputPw.value = '';
+      window.location.href = '/pages/admin.html';
     }
   });
 });
