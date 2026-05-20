@@ -25,30 +25,84 @@
       <section class="hero-kiosk">
         <div class="kiosk-shell">
           <div class="kiosk-screen">
-            <div>
-              <div class="welcome-title">반가워요</div>
-              <div class="welcome-title">주문을 시작할게요</div>
-            </div>
-            <div id="main-selector">
-              <div class="box-selector">
-                <iconify-icon icon="noto:cup-with-straw" width="60"></iconify-icon>
-                <div>먹고가요</div>
+            <div class="kiosk-screen-safe">
+              <div>
+                <div class="welcome-title">반가워요</div>
+                <div class="welcome-title">주문을 시작할게요</div>
               </div>
-              <div class="box-selector">
-                <iconify-icon icon="noto:shopping-bags" width="60"></iconify-icon>
-                <div>포장할게요</div>
+              <div id="main-selector">
+                <div class="box-selector">
+                  <iconify-icon icon="noto:cup-with-straw" width="60"></iconify-icon>
+                  <div>먹고가요</div>
+                </div>
+                <div class="box-selector">
+                  <iconify-icon icon="noto:shopping-bags" width="60"></iconify-icon>
+                  <div>포장할게요</div>
+                </div>
               </div>
+              <div id="languages">
+                <div id="button-wrapper">
+                  <div id="button-korean" class="lang-buttons" data-lang="kor">
+                    <iconify-icon icon="flag:kr-4x3" width="40"></iconify-icon>
+                  </div>
+                  <div id="button-english" class="lang-buttons" data-lang="eng">
+                    <iconify-icon icon="flag:us-4x3" width="40"></iconify-icon>
+                  </div>
+                  <div id="button-spanish" class="lang-buttons" data-lang="esp">
+                    <iconify-icon icon="flag:es-4x3" width="40"></iconify-icon>
+                  </div>
+                </div>
+              </div>
+              <button id="admin-button" type="button" aria-label="관리자 메뉴 열기">
+                <iconify-icon icon="solar:settings-linear" width="22"></iconify-icon>
+              </button>
             </div>
-            <div id="languages">
-              <div id="button-wrapper">
-                <div id="button-korean" class="lang-buttons" data-lang="kor">
-                  <iconify-icon icon="flag:kr-4x3" width="40"></iconify-icon>
+
+            <!-- admin modal -->
+            <div id="admin-modal">
+              <div id="modal-content">
+                <div id="modal-title">
+                  <div>어서오세요!</div>
+                  <div>관리를 시작할까요?</div>
                 </div>
-                <div id="button-english" class="lang-buttons" data-lang="eng">
-                  <iconify-icon icon="flag:us-4x3" width="40"></iconify-icon>
-                </div>
-                <div id="button-spanish" class="lang-buttons" data-lang="esp">
-                  <iconify-icon icon="flag:es-4x3" width="40"></iconify-icon>
+                <div id="modal-form">
+                  <form id="admin-form" action="">
+                    <div>
+                      <!-- <label for="id">ID</label> -->
+                      <input id="form-input-id" type="text" name="id" placeholder="아이디" />
+                    </div>
+                    <div>
+                      <!-- <label for="password">PW</label> -->
+                      <input
+                        id="form-input-pw"
+                        type="password"
+                        name="password"
+                        placeholder="비밀번호"
+                      />
+                    </div>
+                    <div class="button-wrapper">
+                      <button type="cancel" class="cancel" id="cancel">
+                        <div>
+                          <iconify-icon
+                            icon="material-symbols-light:cancel"
+                            width="28"
+                            style="color: white"
+                          />
+                        </div>
+                        <div>홈 화면으로</div>
+                      </button>
+                      <button type="submit" id="submit" class="submit">
+                        <div>
+                          <iconify-icon
+                            icon="material-symbols-light:exit-to-app-rounded"
+                            width="28"
+                            style="color: white"
+                          />
+                        </div>
+                        <div>로그인하기</div>
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>

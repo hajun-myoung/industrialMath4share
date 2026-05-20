@@ -25,7 +25,6 @@
 }
 
 #languages {
-  bottom: 20px;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -67,4 +66,108 @@ svg {
   opacity: 1;
   transform: scale(1.08);
   border: 3px #3182f6 solid;
+}
+
+#admin-button {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  width: 36px;
+  height: 36px;
+
+  border: none;
+  border-radius: 50%;
+
+  /* little bit 투명하게 */
+  background-color: #efefef;
+  opacity: 0.35;
+
+  /* centeralize icon */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+#admin-button:hover {
+  opacity: 0.75;
+}
+
+#admin-modal {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 12px;
+  backdrop-filter: blur(7px);
+
+  display: none;
+}
+
+#modal-content {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  padding-top: 40px;
+  font-size: 2em;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+}
+
+#modal-form {
+  flex: 1;
+  padding-top: 32px;
+}
+
+#modal-form input {
+  font-size: 0.7em;
+  /* font-weight: normal; */
+  width: 100%;
+  height: 7vh;
+  margin-top: 15px;
+  border: none;
+  background: none;
+  border-bottom: 3px rgb(211, 211, 211) solid;
+}
+
+#modal-form input:focus {
+  border-bottom: 3px #3182f6 solid;
+}
+
+#modal-form .button-wrapper {
+  width: 100%;
+  padding-top: 48px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+#modal-form button {
+  min-width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  padding-left: 12px;
+  padding-right: 12px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+  font-size: 0.5em;
+  font-weight: normal;
+}
+#modal-form button div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#modal-form button.submit {
+  background-color: #3182f6;
+}
+
+#modal-form button.cancel {
+  background-color: #f04452;
 }

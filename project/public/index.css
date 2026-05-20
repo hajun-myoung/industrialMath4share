@@ -28,6 +28,17 @@ body {
   min-height: 100%;
 }
 
+/* ignore button default design */
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
 .kiosk-shell {
   position: relative;
   width: min(30vw, 520px);
@@ -49,8 +60,8 @@ body {
   width: 72%;
   height: 70%;
 
-  padding: 20px;
-  padding-top: 40px;
+  /* padding: 20px; */
+  /* padding-top: 40px; */
   background-color: white;
   border: 1px black solid;
   border-radius: 12px;
@@ -60,6 +71,11 @@ body {
 
   /* area testing color */
   /* background-color: red; */
+}
+
+.kiosk-screen-safe {
+  margin: 20px;
+  margin-top: 40px;
 }
 
 /* just for kidding, ad comments */
@@ -114,5 +130,6 @@ body {
   width: min(34vw, 520px);
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
