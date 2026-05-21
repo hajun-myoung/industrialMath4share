@@ -1,0 +1,38 @@
+.modal {
+  display: none;
+}
+
+.menu-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.menu-title span {
+  color: #4593fc;
+  font-size: 1.2em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Segoe UI', sans-serif;
+}
+
+.menu-title button {
+  background-color: #3182f6;
+  border: none;
+  font-size: 1.2em;
+  padding: 8px 12px;
+  border-radius: 12px;
+  color: #fff;
+}
+
+.tablet-shell {
+  position: relative;
+  width: min(30vw, 520px);
+  aspect-ratio: 776 / 1436; /* kiosk-shell image ratio */
+
+  background-image: url('../assets/images/ipad-shell.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  z-index: 2;
+}

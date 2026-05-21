@@ -4,8 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ADMIN PAGE</title>
+    <link rel="stylesheet" href="../css/admin.css" />
+    <script src="../js/admin.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
+    <div class="tablet-shell"></div>
     <h1>Hola, admin!</h1>
+    <div class="menu-management">
+      <div class="menu-title">
+        <span>
+          <i class="fas fa-utensils"></i>
+          메뉴 관리</span
+        >
+        <button class="add-menu-btn" id="addMenuBtn">
+          <i class="fas fa-plus"></i>
+          메뉴추가
+        </button>
+      </div>
+      <div class="menu-list" id="menuList"></div>
+    </div>
+    <div class="modal">Modal Section</div>
   </body>
 </html>
