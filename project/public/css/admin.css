@@ -1,3 +1,50 @@
+.hero-tablet {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.tablet-screen {
+  position: absolute;
+
+  top: 9.1%;
+  left: 12.75%;
+  width: 74.45%;
+  height: 82.5%;
+
+  overflow: scroll;
+  border-radius: 14px;
+}
+
+.tablet-screen header {
+  background-color: rgb(64, 75, 85);
+  height: 7.5%;
+  color: #fff;
+  padding: 12px;
+  font-size: 2em;
+
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+.header-left {
+  justify-self: start;
+}
+
+.header-title {
+  justify-self: center;
+  font-size: 0.7em;
+}
+
+.header-right {
+  justify-self: end;
+  font-size: 0.6em;
+
+  display: flex;
+  gap: 16px;
+}
+
 .modal {
   display: none;
 }
@@ -26,13 +73,49 @@
 
 .tablet-shell {
   position: relative;
-  width: min(30vw, 520px);
-  aspect-ratio: 776 / 1436; /* kiosk-shell image ratio */
+  width: min(80vw, 1436px);
+  aspect-ratio: 1536 / 1024; /* kiosk-shell image ratio */
 
-  background-image: url('../assets/images/ipad-shell.jpg');
+  background-image: url('../assets/images/ipad-shell.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 
   z-index: 2;
+}
+
+.menu-list > div {
+  padding: 4px 0px;
+}
+
+.menu-list > div:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+.menu-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-wrapper div {
+  display: flex;
+  align-items: center;
+}
+
+.menu-wrapper button {
+  border: none;
+  margin-right: 12px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.9em;
+}
+
+.menu-edit {
+  background-color: #15c47e;
+}
+
+.menu-delete {
+  background-color: #f66570;
+  color: #fff;
 }

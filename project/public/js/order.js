@@ -1,12 +1,7 @@
 import { capitalizeWords } from './utils.js';
+import { getAllMenus } from './utils.js';
 
 console.log('order.js');
-
-const getAllMenus = async () => {
-  const res = await fetch(`/api/menus`);
-  const menus = await res.json();
-  return menus;
-};
 
 document.addEventListener('DOMContentLoaded', async () => {
   const menuList = document.getElementById('menuList');
