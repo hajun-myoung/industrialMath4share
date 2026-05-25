@@ -22,6 +22,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     newMenuCategory.className = 'menu-category';
     newMenuPrice.className = 'menu-price';
 
+    newMenuCategory.innerText = menu.category;
+    newMenuPrice.innerText = `₩${Number(menu.price).toLocaleString()}`;
+
     newMenuTitle.innerText = JSON.parse(menu.name)[selectedLanguage];
     newEditButton.innerHTML = `<i class="fa-regular fa-pen-to-square"></i>수정`;
     newDeleteButton.innerHTML = `<i class="fa-solid fa-trash-can"></i>삭제`;

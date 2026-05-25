@@ -199,7 +199,7 @@ section.main > section.body {
 
 .menu-table-header {
   display: grid;
-  grid-template-columns: 1fr 120px 100px 150px;
+  grid-template-columns: 1fr 140px 100px 150px;
 
   padding: 14px 18px;
   background-color: #fafafa;
@@ -213,7 +213,7 @@ section.main > section.body {
 /* 여기서부턴 테이블 내용(헤더 말고)임 */
 .menu-wrapper {
   display: grid;
-  grid-template-columns: 1fr 120px 100px 150px;
+  grid-template-columns: 1fr 140px 100px 150px;
   align-items: center;
 }
 
