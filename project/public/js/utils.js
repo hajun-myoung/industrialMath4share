@@ -24,11 +24,8 @@ export const createNewMenu = async (name, price, category, image = '') => {
 };
 
 export const deleteMenu = async (id) => {
-  const res = await fetch('/api/menus', {
+  const res = await fetch(`/api/menus/${id}`, {
     method: 'DELETE',
-    body: JSON.stringify({
-      id,
-    }),
   });
 
   if (res.status === 200) return true;
