@@ -7,3 +7,30 @@ export const getAllMenus = async () => {
   const menus = await res.json();
   return menus;
 };
+
+export const createNewMenu = async (name, price, category, image = '') => {
+  const res = await fetch('/api/menus', {
+    method: 'POST',
+    body: JSON.stringify({
+      name,
+      price,
+      category,
+      image,
+    }),
+  });
+
+  if (res.status === 200) return true;
+  return false;
+};
+
+export const deleteMenu = async (id) => {
+  const res = await fetch('/api/menus', {
+    method: 'DELETE',
+    body: JSON.stringify({
+      id,
+    }),
+  });
+
+  if (res.status === 200) return true;
+  return false;
+};
