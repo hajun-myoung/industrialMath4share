@@ -59,4 +59,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     cursor.style.transform = `translate(${x}px, ${y}px)`;
   });
+
+  tabletScreen.addEventListener('pointerdown', () => {
+    cursor.classList.add('active');
+  });
+
+  tabletScreen.addEventListener('pointerup', () => {
+    cursor.classList.remove('active');
+  });
 });

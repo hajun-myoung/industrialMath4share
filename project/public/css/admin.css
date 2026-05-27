@@ -23,6 +23,8 @@ button {
 }
 
 .cursor {
+  z-index: 9999;
+
   width: 1rem;
   height: 1rem;
   border-radius: 9999px; /*걍 겁나 큰 수 넣은거임*/
@@ -38,6 +40,11 @@ button {
   pointer-events: none;
   transform: translate(-50%, -50%);
 }
+
+/* .cursor.active {
+  scale: 0.8;
+} */
+/* 이거 왜 위치가 옮겨지냐 */
 
 .tablet-screen header {
   background-color: rgb(64, 75, 85);
