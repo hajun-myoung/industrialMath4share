@@ -1,10 +1,11 @@
-import { getAllMenus } from './utils.js';
+import { getAllMenus, getAllCategories } from './utils.js';
 
 console.log('[INFO]File Loaded: admin.js');
 
 document.addEventListener('DOMContentLoaded', async () => {
   const menuList = document.getElementById('menuList');
   const menus = (await getAllMenus()) ?? [];
+  const categoreis = getAllCategories(menus);
 
   const selectedLanguage = localStorage.getItem('selectedLanguage');
 
@@ -66,5 +67,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   tabletScreen.addEventListener('pointerup', () => {
     cursor.classList.remove('active');
+  });
+
+  const modalCategoryDropdown = document.getElementById('menuCategory');
+  categoreis.forEach((category) => {
+    const newOption = document.createElement('option');
+    newOption.value = category;
+    newOption.innerText = category;
+
+    modalCategoryDropdown.appendChild(newOption);
   });
 });

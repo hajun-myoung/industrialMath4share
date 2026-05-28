@@ -31,3 +31,14 @@ export const deleteMenu = async (id) => {
   if (res.status === 200) return true;
   return false;
 };
+
+export function getAllCategories(menus) {
+  const categories = menus.reduce((categories, curr) => {
+    if (categories.includes(curr.category)) return categories;
+    else {
+      return [...categories, curr.category];
+    }
+  }, []);
+
+  return categories ?? [];
+}
