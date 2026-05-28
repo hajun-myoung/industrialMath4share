@@ -1,4 +1,4 @@
-import { getAllMenus, getAllCategories, createNewMenu } from './utils.js';
+import { getAllMenus, getAllCategories, createNewMenu, deleteMenu } from './utils.js';
 
 console.log('[INFO]File Loaded: admin.js');
 
@@ -37,6 +37,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     newMenuWrapper.className = 'menu-wrapper';
 
     newButtonGroups.className = 'menu-button-group';
+
+    // deleteButton feature
+    newDeleteButton.addEventListener('click', () => {
+      const isDeleted = deleteMenu(menu.id);
+      if (isDeleted) alert('Successfully Deleted: ', JSON.parse(menu.name)[selectedLanguage]);
+      else alert('Failed to delete a menu');
+    });
 
     newButtonGroups.appendChild(newEditButton);
     newButtonGroups.appendChild(newDeleteButton);
