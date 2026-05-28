@@ -1,4 +1,4 @@
-import { getAllMenus, getAllCategories } from './utils.js';
+import { getAllMenus, getAllCategories, createNewMenu } from './utils.js';
 
 console.log('[INFO]File Loaded: admin.js');
 
@@ -76,5 +76,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     newOption.innerText = category;
 
     modalCategoryDropdown.appendChild(newOption);
+  });
+
+  const menuAddingModal = document.getElementById('menuAddingModal');
+  menuAddingModal.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+    console.log(data);
+    // [Log] {menuNameKor: "", menuNameEng: "", menuNameEsp: "", menuPrice: "", menuImage: ""} (admin.js, line 87)
+
+    const menuName = {
+      kor: data['menuNameKor'],
+      eng: data['menuNameEng'],
+      esp: data['menuNameEsp'],
+    };
+
+    const price = +data['menuPrice'];
+    const category = data['category'];
+    const image = data['menuImage'];
+
+    createNewMenu(menuName, price, category, image);
   });
 });

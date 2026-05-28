@@ -81,18 +81,31 @@
           <div class="modal">
             <div class="modal-main" id="modalMain">
               <div class="modal-title">메뉴 추가하기</div>
-              <form class="modal-body">
+              <form class="modal-body" id="menuAddingModal">
                 <div class="modal-fields">
                   <div class="input-name form-input">
                     <label class="input-label" for="menuNameKo">메뉴 이름</label>
                     <input
-                      id="menuNameKo"
+                      id="menuNameKor"
                       class="additional-gap"
                       type="text"
                       placeholder="메뉴 이름(한글)"
+                      name="menuNameKor"
                     />
-                    <input class="additional-gap" type="text" placeholder="메뉴 이름(영어)" />
-                    <input class="additional-gap" type="text" placeholder="메뉴 이름(스페인어)" />
+                    <input
+                      id="menuNameEng"
+                      class="additional-gap"
+                      type="text"
+                      placeholder="메뉴 이름(영어)"
+                      name="menuNameEng"
+                    />
+                    <input
+                      id="menuNameEsp"
+                      class="additional-gap"
+                      type="text"
+                      placeholder="메뉴 이름(스페인어)"
+                      name="menuNameEsp"
+                    />
                   </div>
                   <div class="input-category form-input">
                     <label class="input-label" for="menuCategory">카테고리</label>
@@ -105,11 +118,11 @@
                   </div>
                   <div class="input-price form-input">
                     <label class="input-label" for="menuPrice">가격</label>
-                    <input id="menuPrice" type="text" placeholder="가격(원화)" />
+                    <input id="menuPrice" name="menuPrice" type="text" placeholder="가격(원화)" />
                   </div>
                   <div class="input-image form-input">
                     <label class="input-label" for="menuImage">이미지 주소</label>
-                    <input id="menuImage" type="text" placeholder="이미지 주소" />
+                    <input id="menuImage" name="menuImage" type="text" placeholder="이미지 주소" />
                   </div>
                 </div>
                 <div class="modal-actions">

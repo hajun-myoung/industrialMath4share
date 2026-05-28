@@ -268,13 +268,13 @@ section.main > section.body {
   position: absolute;
   inset: 0;
   z-index: 10;
-  /* display: none; */
+  display: none;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(3px);
 
-  display: flex;
+  /* display: flex; */
 }
 
 .modal > .modal-main {
