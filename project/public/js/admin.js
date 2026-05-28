@@ -44,11 +44,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // deleteButton feature
     newDeleteButton.addEventListener('click', () => {
-      const isDeleted = deleteMenu(menu.id);
-      if (isDeleted) alert('Successfully Deleted: ', JSON.parse(menu.name)[selectedLanguage]);
-      else alert('Failed to delete a menu');
+      const doubleCheck = confirm(
+        `This will remove menu: ${JSON.parse(menu.name)[selectedLanguage]} Are you SURE?`,
+      );
 
-      location.reload();
+      if (!doubleCheck) location.reload();
+      else {
+        const isDeleted = deleteMenu(menu.id);
+        if (isDeleted) alert('Successfully Deleted: ');
+        else alert('Failed to delete a menu');
+        location.reload();
+      }
     });
 
     newButtonGroups.appendChild(newEditButton);
