@@ -2,6 +2,10 @@ import { getAllMenus, getAllCategories, createNewMenu, deleteMenu } from './util
 
 console.log('[INFO]File Loaded: admin.js');
 
+// FIXME: State-based table update가 아니라 forced refreshing으로 접근하고 있음
+// state를 구현하거나, 페이지 전체가 아니라 표만 refresh하는 방법을 찾고
+// 안된다고 하면 menus 배열이라도 메뉴얼하게 컨트롤하기
+
 document.addEventListener('DOMContentLoaded', async () => {
   const menuList = document.getElementById('menuList');
   const menus = (await getAllMenus()) ?? [];
@@ -43,6 +47,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       const isDeleted = deleteMenu(menu.id);
       if (isDeleted) alert('Successfully Deleted: ', JSON.parse(menu.name)[selectedLanguage]);
       else alert('Failed to delete a menu');
+
+      location.reload();
     });
 
     newButtonGroups.appendChild(newEditButton);
@@ -105,7 +111,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     const category = data['category'];
     const image = data['menuImage'];
 
-    createNewMenu(menuName, price, category, image);
+    const isCreated = createNewMenu(menuName, price, category, image);
+    if (isCreated) alert('successfully created');
+    else alert('failed to create');
+    location.reload();
 
     modal.style.display = 'none';
   });
