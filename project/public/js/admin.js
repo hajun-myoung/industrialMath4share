@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     modalCategoryDropdown.appendChild(newOption);
   });
 
+  const modal = document.getElementById('modal');
   const menuAddingModal = document.getElementById('menuAddingModal');
   menuAddingModal.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -98,5 +99,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     const image = data['menuImage'];
 
     createNewMenu(menuName, price, category, image);
+
+    modal.style.display = 'none';
+  });
+
+  // Modal Opener
+  const addMenuBtn = document.getElementById('addMenuBtn');
+  addMenuBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    // reuse menuAddingModal when I decleared at submit handle
+    modal.style.display = 'flex';
+  });
+
+  window.addEventListener('click', (e) => {
+    e.target === modal && (modal.style.display = 'none');
   });
 });
