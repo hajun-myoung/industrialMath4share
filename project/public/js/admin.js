@@ -8,10 +8,11 @@ console.log('[INFO]File Loaded: admin.js');
 // FIXME: State-based table update가 아니라 forced refreshing으로 접근하고 있음
 // state를 구현하거나, 페이지 전체가 아니라 표만 refresh하는 방법을 찾고
 // 안된다고 하면 menus 배열이라도 메뉴얼하게 컨트롤하기
+// index.js
 
 document.addEventListener('DOMContentLoaded', async () => {
   const menuList = document.getElementById('menuList');
-  const menus = (await getAllMenus()) ?? [];
+  const menus = await getAllMenus();
   const categoreis = getAllCategories(menus);
 
   const selectedLanguage = localStorage.getItem('selectedLanguage');
