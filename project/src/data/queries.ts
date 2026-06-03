@@ -62,7 +62,7 @@ const updateMenuById = (menuId: string, menu: any) => {
   db.exec(`
     UPDATE ${TABLE_NAMES.menus}
     SET 
-      menu_name ='${menu.name}',
+      menu_name ='${JSON.stringify(menu.name)}',
       price = ${menu.price},
       category = '${menu.category}',
       image = '${menu.image ?? ''}'

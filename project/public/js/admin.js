@@ -1,4 +1,7 @@
-import { getAllMenus, getAllCategories, createNewMenu, deleteMenu } from './utils.js';
+import { getAllMenus, getAllCategories, createNewMenu, deleteMenu, updateMenu } from './utils.js';
+
+let isEditting = false;
+let menu_id = null;
 
 console.log('[INFO]File Loaded: admin.js');
 
@@ -41,6 +44,40 @@ document.addEventListener('DOMContentLoaded', async () => {
     newMenuWrapper.className = 'menu-wrapper';
 
     newButtonGroups.className = 'menu-button-group';
+
+    newEditButton.addEventListener('click', () => {
+      isEditting = true;
+      menu_id = menu.id;
+      // console.log('target menu:', menu);
+      modal.style.display = 'flex';
+      const modalTitle = document.querySelector('.modal-title');
+      modalTitle.innerText = '메뉴 수정하기';
+
+      const menuNameKorInput = document.getElementById('menuNameKor');
+      const menuNameEngInput = document.getElementById('menuNameEng');
+      const menuNameEspInput = document.getElementById('menuNameEsp');
+      const menuPriceInput = document.getElementById('menuPrice');
+      const menuImageInput = document.getElementById('menuImage');
+      const menuCategorySelect = document.getElementById('menuCategory');
+
+      // 기존값 세팅
+      const menuNameObj = JSON.parse(menu.name);
+      menuNameKorInput.value = menuNameObj.kor || '';
+      menuNameEngInput.value = menuNameObj.eng || '';
+      menuNameEspInput.value = menuNameObj.esp || '';
+      menuPriceInput.value = menu.price || '';
+      menuImageInput.value = menu.image || '';
+      menuCategorySelect.value = menu.category || '';
+
+      // 버튼 내부 텍스트 바꾸기
+      const menuEditSubmitButton = document.getElementById('modal-submit-button');
+      menuEditSubmitButton.style.backgroundColor = '#76e4b8';
+      menuEditSubmitButton.style.color = '#000';
+      menuEditSubmitButton.innerHTML = `
+        <i class="fa-solid fa-pen"></i>
+        메뉴수정
+      `;
+    });
 
     // deleteButton feature
     newDeleteButton.addEventListener('click', () => {
@@ -117,9 +154,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     const category = data['category'];
     const image = data['menuImage'];
 
-    const isCreated = createNewMenu(menuName, price, category, image);
-    if (isCreated) alert('successfully created');
-    else alert('failed to create');
+    let res = null;
+    if (!isEditting) {
+      res = createNewMenu(menuName, price, category, image);
+    } else {
+      res = updateMenu(menu_id, menuName, price, category, image);
+    }
+    if (res) {
+      if (isEditting) alert('successfully editted');
+      else alert('succesfully created');
+    } else alert('failed to create');
     location.reload();
 
     modal.style.display = 'none';
@@ -129,8 +173,37 @@ document.addEventListener('DOMContentLoaded', async () => {
   const addMenuBtn = document.getElementById('addMenuBtn');
   addMenuBtn.addEventListener('click', (e) => {
     e.preventDefault();
+    isEditting = false;
+    menu_id = null;
+
     // reuse menuAddingModal when I decleared at submit handle
     modal.style.display = 'flex';
+    const modalTitle = document.querySelector('.modal-title');
+    modalTitle.innerText = '메뉴 추가하기';
+
+    const menuNameKorInput = document.getElementById('menuNameKor');
+    const menuNameEngInput = document.getElementById('menuNameEng');
+    const menuNameEspInput = document.getElementById('menuNameEsp');
+    const menuPriceInput = document.getElementById('menuPrice');
+    const menuImageInput = document.getElementById('menuImage');
+    const menuCategorySelect = document.getElementById('menuCategory');
+
+    // 값 초기화
+    menuNameKorInput.value = '';
+    menuNameEngInput.value = '';
+    menuNameEspInput.value = '';
+    menuPriceInput.value = '';
+    menuImageInput.value = '';
+    menuCategorySelect.value = '';
+
+    // 추가용
+    const menuEditSubmitButton = document.getElementById('modal-submit-button');
+    menuEditSubmitButton.style.backgroundColor = '#76e4b8';
+    menuEditSubmitButton.style.color = '#000';
+    menuEditSubmitButton.innerHTML = `
+        <i class="fas fa-plus"></i>
+        메뉴추가
+      `;
   });
 
   window.addEventListener('click', (e) => {

@@ -8,6 +8,21 @@ export const getAllMenus = async () => {
   return menus;
 };
 
+export const updateMenu = async (id, name, price, category, image = '') => {
+  const res = await fetch(`/api/menus/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify({
+      name,
+      price,
+      category,
+      image,
+    }),
+  });
+
+  if (res.status === 200) return true;
+  else false;
+};
+
 export const createNewMenu = async (name, price, category, image = '') => {
   const res = await fetch('/api/menus', {
     method: 'POST',
