@@ -3,6 +3,195 @@ import { getAllMenus } from './utils.js';
 
 console.log('order.js');
 
+let shoppingCart = {};
+let sheetCloseTimer = null;
+
+const SHEET_TRANSITION_MS = 220;
+
+function formatPrice(price) {
+  return `₩${Number(price).toLocaleString()}`;
+}
+
+function formatCartCount(count, language) {
+  const labels = {
+    kor: `${count}개 메뉴`,
+    eng: `${count} items`,
+    esp: `${count} menús`,
+  };
+
+  return labels[language] ?? labels.kor;
+}
+
+function getCartItems() {
+  return Object.values(shoppingCart);
+}
+
+function getCartCount() {
+  return getCartItems().reduce((sum, item) => sum + item.quantity, 0);
+}
+
+function getCartTotal() {
+  return getCartItems().reduce((sum, item) => sum + item.price * item.quantity, 0);
+}
+
+// 이름 아이디어가 없어서 cart sheet라고 지음: 의도 - 장바구니 상세보기
+// 뭐 일단 sheet(shit 아님)긴 하잖...아...?
+function isCartSheetOpen() {
+  const i_wanna_go_home = true; // for real
+  return document.getElementById('cart-bottom-sheet')?.classList.contains('is-open') ?? false;
+}
+
+function addToCart(menu) {
+  if (shoppingCart[menu.id]) {
+    shoppingCart[menu.id].quantity += 1;
+  } else {
+    shoppingCart[menu.id] = {
+      id: menu.id,
+      name: menu.displayName,
+      price: Number(menu.price),
+      quantity: 1,
+    };
+  }
+
+  renderCartSummary();
+}
+
+function removeFromCart(menuId) {
+  delete shoppingCart[menuId];
+  renderCartSummary();
+}
+
+function increaseQuantity(menuId) {
+  if (!shoppingCart[menuId]) return;
+
+  shoppingCart[menuId].quantity += 1;
+  renderCartSummary();
+}
+
+function decreaseQuantity(menuId) {
+  if (!shoppingCart[menuId]) return;
+
+  if (shoppingCart[menuId].quantity <= 1) {
+    removeFromCart(menuId);
+    return;
+  }
+
+  shoppingCart[menuId].quantity -= 1;
+  renderCartSummary();
+}
+
+// order.html 하단에 뜨는 그 플로팅 바 렌더러
+function renderCartSummary() {
+  const count = getCartCount();
+  const total = getCartTotal();
+  const cartSummaryBar = document.getElementById('cart-summary-bar');
+  const cartSummaryCount = document.getElementById('cart-summary-count');
+  const cartSummaryTotal = document.getElementById('cart-summary-total');
+  const selectedLanguage = localStorage.getItem('selectedLanguage') || 'kor';
+
+  if (!cartSummaryBar || !cartSummaryCount || !cartSummaryTotal) return;
+
+  if (count > 0) {
+    cartSummaryBar.hidden = false;
+    cartSummaryBar.disabled = false;
+    cartSummaryCount.innerText = formatCartCount(count, selectedLanguage);
+    cartSummaryTotal.innerText = formatPrice(total);
+  } else {
+    cartSummaryBar.hidden = true;
+    cartSummaryBar.disabled = true;
+
+    if (isCartSheetOpen()) {
+      closeCartSheet();
+    }
+  }
+
+  if (isCartSheetOpen()) {
+    renderCartSheet();
+  }
+}
+
+// 주문 상세보기 렌더러
+function renderCartSheet() {
+  const cartList = document.getElementById('cart-list');
+  const cartSheetTotal = document.getElementById('cart-sheet-total');
+
+  if (!cartList || !cartSheetTotal) return;
+
+  cartList.innerHTML = '';
+
+  getCartItems().forEach((item) => {
+    const cartItem = document.createElement('div');
+    cartItem.className = 'cart-item';
+    cartItem.innerHTML = `
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-meta">${formatPrice(item.price)} × ${item.quantity}</div>
+        <div class="quantity-control" aria-label="${item.name} 수량 조절">
+          <button type="button" data-action="decrease" data-menu-id="${item.id}" aria-label="${item.name} 수량 줄이기">-</button>
+          <span>${item.quantity}</span>
+          <button type="button" data-action="increase" data-menu-id="${item.id}" aria-label="${item.name} 수량 늘리기">+</button>
+        </div>
+      </div>
+      <div class="cart-item-subtotal">${formatPrice(item.price * item.quantity)}</div>
+    `;
+    cartList.appendChild(cartItem);
+  });
+
+  cartSheetTotal.innerText = formatPrice(getCartTotal());
+}
+
+function openCartSheet() {
+  if (getCartCount() === 0) return;
+
+  const kioskScreen = document.querySelector('.kiosk-screen');
+  const backdrop = document.getElementById('sheet-backdrop');
+  const sheet = document.getElementById('cart-bottom-sheet');
+  const cartSummaryBar = document.getElementById('cart-summary-bar');
+
+  if (!backdrop || !sheet || !cartSummaryBar) return;
+
+  clearTimeout(sheetCloseTimer);
+  renderCartSheet();
+  backdrop.hidden = false;
+  sheet.hidden = false;
+  cartSummaryBar.setAttribute('aria-expanded', 'true');
+  kioskScreen?.classList.add('sheet-open');
+
+  requestAnimationFrame(() => {
+    backdrop.classList.add('is-open');
+    sheet.classList.add('is-open');
+  });
+}
+
+function closeCartSheet() {
+  const kioskScreen = document.querySelector('.kiosk-screen');
+  const backdrop = document.getElementById('sheet-backdrop');
+  const sheet = document.getElementById('cart-bottom-sheet');
+  const cartSummaryBar = document.getElementById('cart-summary-bar');
+
+  if (!backdrop || !sheet || !cartSummaryBar) return;
+
+  backdrop.classList.remove('is-open');
+  sheet.classList.remove('is-open');
+  cartSummaryBar.setAttribute('aria-expanded', 'false');
+  kioskScreen?.classList.remove('sheet-open');
+
+  clearTimeout(sheetCloseTimer);
+  sheetCloseTimer = setTimeout(() => {
+    backdrop.hidden = true;
+    sheet.hidden = true;
+  }, SHEET_TRANSITION_MS);
+}
+
+function getDisplayName(menu, language) {
+  try {
+    const parsedName = JSON.parse(menu.name);
+    return parsedName[language] ?? parsedName.kor ?? Object.values(parsedName)[0] ?? '';
+  } catch {
+    return menu.name;
+  }
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   const menuList = document.getElementById('menuList');
   const menus = (await getAllMenus()) ?? [];
@@ -87,19 +276,21 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const newMenusCardWrapper = document.createElement('div');
     newMenusCardWrapper.className = 'menu-cards-wrapper';
-    includedMenus.forEach(async (menu) => {
-      const newMenuCard = document.createElement('div');
+    includedMenus.forEach((menu) => {
+      const newMenuCard = document.createElement('button');
       const newImageWrapper = document.createElement('div');
       const newImageEle = document.createElement('img');
       const newMenuName = document.createElement('div');
       const newPrice = document.createElement('div');
+      const displayName = getDisplayName(menu, localStorage.getItem('selectedLanguage') || 'kor');
 
+      newMenuCard.type = 'button';
       newImageEle.src = menu.image;
+      newImageEle.alt = displayName;
       newImageWrapper.appendChild(newImageEle);
       newImageWrapper.className = 'menu-card-image';
 
-      const parsedName = await JSON.parse(menu.name);
-      newMenuName.innerText = parsedName[localStorage.getItem('selectedLanguage')];
+      newMenuName.innerText = displayName;
       newMenuName.className = 'menu-card-name';
 
       newPrice.innerText = `₩${Number(menu.price).toLocaleString()}`;
@@ -109,6 +300,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       newMenuCard.appendChild(newImageWrapper);
       newMenuCard.appendChild(newMenuName);
       newMenuCard.appendChild(newPrice);
+      newMenuCard.addEventListener('click', () => {
+        addToCart({
+          id: menu.id,
+          displayName,
+          price: menu.price,
+        });
+      });
       newMenusCardWrapper.appendChild(newMenuCard);
     });
     newSection.appendChild(newMenusCardWrapper);
@@ -177,4 +375,34 @@ document.addEventListener('DOMContentLoaded', async () => {
       button.classList.toggle('active', button.dataset.target === currentSection);
     });
   });
+
+  document.getElementById('cart-summary-bar')?.addEventListener('click', openCartSheet);
+  document.getElementById('sheet-backdrop')?.addEventListener('click', closeCartSheet);
+  document.getElementById('cart-sheet-close')?.addEventListener('click', closeCartSheet);
+  document.getElementById('order-button')?.addEventListener('click', () => {
+    console.log(getCartItems());
+  });
+
+  document.getElementById('cart-list')?.addEventListener('click', (event) => {
+    if (!(event.target instanceof Element)) return;
+
+    const target = event.target.closest('button[data-action]');
+    if (!target) return;
+
+    const menuId = target.dataset.menuId;
+
+    if (target.dataset.action === 'increase') {
+      increaseQuantity(menuId);
+    } else if (target.dataset.action === 'decrease') {
+      decreaseQuantity(menuId);
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && isCartSheetOpen()) {
+      closeCartSheet();
+    }
+  });
+
+  renderCartSummary();
 });
