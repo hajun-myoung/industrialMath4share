@@ -237,7 +237,7 @@ header > div > div > div {
   width: 44px;
   height: 5px;
   margin: 10px auto 6px;
-  border-radius: 50%;
+  border-radius: 99999px;
   background-color: #d1d5db;
   flex-shrink: 0;
 }
