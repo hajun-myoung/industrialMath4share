@@ -115,6 +115,8 @@ header > div > div > div {
 
 .menu-card {
   padding-bottom: 12px;
+  display: flex;
+  flex-direction: column;
 }
 
 .menu-card-name {
