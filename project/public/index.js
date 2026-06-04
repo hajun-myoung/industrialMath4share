@@ -63,9 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const adminInputId = document.getElementById('form-input-id');
   const adminInputPw = document.getElementById('form-input-pw');
 
-  adminForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
+  function checkAdminSignin() {
     if (adminInputId.value !== 'admin') {
       alert('Wrong ID');
       window.location.href = '/index.html';
@@ -77,5 +75,16 @@ document.addEventListener('DOMContentLoaded', () => {
       adminInputPw.value = '';
       window.location.href = '/pages/admin.html';
     }
+  }
+
+  adminForm.addEventListener('keypress', (e) => {
+    if (e.code.toLowerCase() === 'enter' || e.code.toLowerCase() === 'return') {
+      checkAdminSignin();
+    }
+  });
+
+  adminForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    checkAdminSignin();
   });
 });
