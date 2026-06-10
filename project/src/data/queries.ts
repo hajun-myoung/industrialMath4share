@@ -43,7 +43,7 @@ const getAllMenus = () =>
   `,
     )
     .all() as unknown as MenuResponse[];
-const getMenuByMenuId = (menuId: MenuName) =>
+const getMenuByMenuId = (menuId: string) =>
   db
     .prepare(
       `
@@ -52,7 +52,7 @@ const getMenuByMenuId = (menuId: MenuName) =>
   FROM ${TABLE_NAMES.menus} WHERE menu_id = ?
   `,
     )
-    .get(JSON.stringify(menuId)) as unknown as MenuResponse;
+    .get(menuId) as unknown as MenuResponse | undefined;
 const removeMenuById = (menuId: string) => {
   db.exec(`
     DELETE FROM ${TABLE_NAMES.menus} WHERE menu_id='${menuId}'

@@ -2,6 +2,7 @@ import { Hono } from 'hono';
 import type { OrderDetailInput } from './data/model.js';
 import { createOrder, createOrderDetail, getMenuByMenuId } from './data/queries.js';
 import { nanoid } from 'nanoid';
+import { HTTPException } from 'hono/http-exception';
 const app = new Hono();
 // create an order
 app.post('/', async (c) => {
@@ -10,6 +11,9 @@ app.post('/', async (c) => {
   let totalPrice = 0;
   const preOrderDetails = orderDetailInputs.map((orderDetail) => {
     const menu = getMenuByMenuId(orderDetail.menu_id);
+    if (!menu) {
+      throw new HTTPException(400, { message: 'Menu not found' });
+    }
     totalPrice += menu.price * orderDetail.quantity;
     return {
       menu_name: menu.name,

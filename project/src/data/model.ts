@@ -36,7 +36,7 @@ export interface OrderResponse extends Order {
   orderDetails: OrderDetailResponse[];
 }
 export interface OrderDetailInput {
-  menu_id: MenuName;
+  menu_id: string;
   quantity: number;
 }
 export interface OrderDetailResponse {
