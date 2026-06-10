@@ -22,6 +22,15 @@ function formatCartCount(count, language) {
   return labels[language] ?? labels.kor;
 }
 
+function clearCartItems() {
+  shoppingCart = {};
+  renderCartSheet();
+  renderCartSummary();
+
+  closeCartSheet();
+  return true;
+}
+
 function getCartItems() {
   return Object.values(shoppingCart);
 }
@@ -382,6 +391,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('order-button')?.addEventListener('click', () => {
     console.log(getCartItems());
   });
+
+  document.getElementById('order-clear-button')?.addEventListener('click', clearCartItems);
 
   document.getElementById('cart-list')?.addEventListener('click', (event) => {
     if (!(event.target instanceof Element)) return;

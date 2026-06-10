@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="../css/order.css" />
     <script type="module" src="../js/order.js"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
-    <script src="../index.js"></script>
+    <!-- <script src="../index.js"></script> -->
+    <!-- there is no need to load index.js -->
+    <!-- ...maybe -->
   </head>
   <body>
     <div class="kiosk-shell">
@@ -23,8 +25,7 @@
           </div>
         </header>
         <nav id="categories"></nav>
-        <main id="menu-scroll-area">
-        </main>
+        <main id="menu-scroll-area"></main>
         <button
           id="cart-summary-bar"
           class="cart-summary-bar"
@@ -61,7 +62,12 @@
               <span>총 결제금액</span>
               <strong id="cart-sheet-total">₩0</strong>
             </div>
-            <button id="order-button" class="order-button" type="button">주문하기</button>
+            <div class="order-btn-group">
+              <button id="order-clear-button" class="order-clear-button" type="button">
+                장바구니 비우기
+              </button>
+              <button id="order-button" class="order-button" type="button">주문하기</button>
+            </div>
           </footer>
         </section>
       </div>

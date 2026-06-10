@@ -371,3 +371,19 @@ header > div > div > div {
   font-weight: 800;
   cursor: pointer;
 }
+
+.order-clear-button {
+  width: 100%;
+  min-height: 52px;
+  border-radius: 16px;
+  background-color: #fff;
+  color: #111827;
+  border: 1px #111827 solid;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.order-btn-group {
+  display: flex;
+  gap: 8px;
+}
