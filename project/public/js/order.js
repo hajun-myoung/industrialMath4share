@@ -31,6 +31,10 @@ function clearCartItems() {
   return true;
 }
 
+/**
+ * 장바구니 전체 객체를 반환합니다
+ * @returns Object.values(shoppingCart)
+ */
 function getCartItems() {
   return Object.values(shoppingCart);
 }
@@ -389,7 +393,19 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('sheet-backdrop')?.addEventListener('click', closeCartSheet);
   document.getElementById('cart-sheet-close')?.addEventListener('click', closeCartSheet);
   document.getElementById('order-button')?.addEventListener('click', () => {
-    console.log(getCartItems());
+    const items = getCartItems();
+
+    if (items.length === 0) return;
+
+    sessionStorage.setItem(
+      'checkoutDraft',
+      JSON.stringify({
+        items,
+        total: getCartTotal(),
+        createdAt: Date.now(),
+      }),
+    );
+    window.location.href = './checkout.html';
   });
 
   document.getElementById('order-clear-button')?.addEventListener('click', clearCartItems);
