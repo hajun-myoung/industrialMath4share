@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meri Latte</title>
+    <link rel="stylesheet" href="../index.css" />
+    <link rel="stylesheet" href="../css/checkout.css" />
+    <script type="module" src="../js/checkout.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
+  </head>
+  <body>
+    <div class="kiosk-shell">
+      <div class="kiosk-screen">
+        <header class="checkout-header">
+          <button
+            id="backButton"
+            class="header-icon-button"
+            type="button"
+            aria-label="주문 화면으로 돌아가기"
+          >
+            <iconify-icon icon="ic:baseline-arrow-back" width="28"></iconify-icon>
+          </button>
+          <h1>결제하기</h1>
+          <span class="header-spacer" aria-hidden="true"></span>
+        </header>
+
+        <main class="checkout-main">
+          <section class="order-summary-band" aria-labelledby="order-summary-title">
+            <button
+              id="order-detail-toggle"
+              class="order-detail-toggle"
+              type="button"
+              aria-expanded="false"
+              aria-controls="order-receipt"
+            >
+              <span class="toggle-label">
+                <iconify-icon
+                  class="toggle-icon"
+                  icon="ic:round-keyboard-arrow-down"
+                  width="24"
+                ></iconify-icon>
+                <span id="order-summary-title">주문 상세보기</span>
+              </span>
+              <strong id="summary-total">₩0</strong>
+            </button>
+
+            <div id="order-receipt" class="order-receipt" hidden>
+              <div id="receipt-list" class="receipt-list"></div>
+              <div class="receipt-divider"></div>
+              <div class="receipt-total-row">
+                <span>총 결제금액</span>
+                <strong id="receipt-total">₩0</strong>
+              </div>
+            </div>
+          </section>
+
+          <section class="payment-section" aria-labelledby="payment-title">
+            <h2 id="payment-title">결제수단 선택하기</h2>
+            <div
+              id="payment-methods"
+              class="payment-methods"
+              role="radiogroup"
+              aria-labelledby="payment-title"
+            >
+              <button
+                class="payment-card"
+                type="button"
+                role="radio"
+                aria-checked="true"
+                data-method="cash"
+              >
+                <span class="payment-icon">
+                  <iconify-icon icon="ic:round-payments" width="30"></iconify-icon>
+                </span>
+                <span class="payment-copy">
+                  <strong>현금</strong>
+                  <span>카운터에서 결제</span>
+                </span>
+              </button>
+              <button
+                class="payment-card"
+                type="button"
+                role="radio"
+                aria-checked="false"
+                data-method="card"
+              >
+                <span class="payment-icon">
+                  <iconify-icon icon="ic:round-credit-card" width="30"></iconify-icon>
+                </span>
+                <span class="payment-copy">
+                  <strong>신용카드</strong>
+                  <span>카드 리더기 이용</span>
+                </span>
+              </button>
+              <button
+                class="payment-card"
+                type="button"
+                role="radio"
+                aria-checked="false"
+                data-method="apple-pay"
+              >
+                <span class="payment-icon">
+                  <iconify-icon icon="ic:round-phone-iphone" width="30"></iconify-icon>
+                </span>
+                <span class="payment-copy">
+                  <strong>Apple Pay</strong>
+                  <span>기기를 가까이 대기</span>
+                </span>
+              </button>
+            </div>
+          </section>
+        </main>
+
+        <footer class="checkout-footer">
+          <p id="checkout-message" class="checkout-message" aria-live="polite"></p>
+          <button id="pay-button" class="pay-button" type="button">결제하기</button>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
