@@ -136,7 +136,7 @@ async function submitOrder() {
     }
 
     resetCheckoutSession();
-    window.location.href = '../index.html';
+    window.location.href = './checkout-complete.html';
   } catch {
     setMessage('결제 요청에 실패했습니다. 잠시 후 다시 시도해 주세요.', 'error');
     setSubmitting(false);
