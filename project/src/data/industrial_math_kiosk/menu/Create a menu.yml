@@ -11,12 +11,12 @@ http:
     data: |-
       {
         "name": {
-          "kor":"딸기 아사이 레모네이드 리프레셔",
-          "eng":"Strawberry Acai Lemonade Refresher",
-          "esp":"Refresher de Limonada, Fresa y Açaí"
+          "kor":"테스트메뉴",
+          "eng":"TestMenu",
+          "esp":"TestoMenú"
         },
         "price": 7200,
-        "category": "Ade/Smoothie",
+        "category": "Coffee",
         "img": "https://joyfoodsunshine.com/wp-content/uploads/2019/01/strawberry-banana-smoothie-recipe-1x1-1.jpg"
       }
   auth: inherit
