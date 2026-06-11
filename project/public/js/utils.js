@@ -57,3 +57,15 @@ export function getAllCategories(menus) {
 
   return categories ?? [];
 }
+
+export async function createOrder(orderPayload) {
+  const res = await fetch('/api/orders', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(orderPayload),
+  });
+
+  return res;
+}

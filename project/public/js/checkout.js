@@ -1,3 +1,5 @@
+import { createOrder } from './utils';
+
 const CHECKOUT_DRAFT_KEY = 'checkoutDraft';
 
 const paymentLabels = {
@@ -123,13 +125,7 @@ async function submitOrder() {
   setMessage(`${paymentLabels[selectedPaymentMethod]} 결제를 진행합니다.`);
 
   try {
-    const response = await fetch('/api/orders', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(orderPayload),
-    });
+    const response = await createOrder(orderPayload);
 
     if (!response.ok) {
       throw new Error('주문 전송 실패');
