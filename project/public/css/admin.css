@@ -198,13 +198,19 @@ section.main > section.left-sidebar .sidebar-group .sidebar-group-title {
 }
 
 section.main > section.left-sidebar .sidebar-group .sidebar-group-content {
+  display: block;
   font-size: 1.2em;
   color: rgba(0, 12, 30, 0.7);
+  text-decoration: none;
 }
 
 section.main > section.left-sidebar .sidebar-group .sidebar-group-content.selected {
   color: #4593fc;
   font-weight: 700;
+}
+
+section.main > section.left-sidebar a.sidebar-group-content:hover {
+  color: #3182f6;
 }
 
 section.main > section.body {
@@ -238,6 +244,30 @@ section.main > section.body {
   font-size: 0.85em;
   font-weight: 700;
   border-bottom: 1px solid rgba(0, 12, 30, 0.06);
+}
+
+.popular-menu-placeholder {
+  min-height: 260px;
+  border-radius: 18px;
+  border: 1px solid rgba(0, 12, 30, 0.08);
+  background-color: #fff;
+  color: rgba(0, 12, 30, 0.55);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.popular-menu-placeholder i {
+  color: #4593fc;
+  font-size: 2em;
+}
+
+.popular-menu-placeholder strong {
+  color: #191f28;
+  font-size: 1.3em;
 }
 
 /* 여기서부턴 테이블 내용(헤더 말고)임 */

@@ -105,27 +105,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     menuList.appendChild(newMenuWrapper);
   });
 
-  // mockup-touch-cursor
-  const tabletScreen = document.querySelector('.tablet-screen');
-  const cursor = document.getElementById('cursor');
-
-  tabletScreen.addEventListener('pointermove', (e) => {
-    const rect = tabletScreen.getBoundingClientRect();
-
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    cursor.style.transform = `translate(${x}px, ${y}px)`;
-  });
-
-  tabletScreen.addEventListener('pointerdown', () => {
-    cursor.classList.add('active');
-  });
-
-  tabletScreen.addEventListener('pointerup', () => {
-    cursor.classList.remove('active');
-  });
-
   const modalCategoryDropdown = document.getElementById('menuCategory');
   categoreis.forEach((category) => {
     const newOption = document.createElement('option');

@@ -6,6 +6,7 @@
     <title>ADMIN PAGE</title>
     <link rel="stylesheet" href="../css/admin.css" />
     <link rel="stylesheet" href="../index.css" />
+    <script type="module" src="../js/admin-common.js"></script>
     <script type="module" src="../js/admin.js"></script>
     <link
       rel="stylesheet"
@@ -16,7 +17,7 @@
     />
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
   </head>
-  <body>
+  <body data-admin-page="menu-management">
     <section class="hero-tablet">
       <div class="tablet-shell">
         <div class="tablet-screen">
@@ -37,8 +38,12 @@
             <section class="left-sidebar">
               <div class="sidebar-group">
                 <div class="sidebar-group-title">메뉴</div>
-                <div class="sidebar-group-content selected">메뉴 관리</div>
-                <div class="sidebar-group-content">인기메뉴 관리</div>
+                <a class="sidebar-group-content" data-nav-page="menu-management" href="./admin.html"
+                  >메뉴 관리</a
+                >
+                <a class="sidebar-group-content" data-nav-page="popular-menu" href="./popular-menu.html"
+                  >인기메뉴 관리</a
+                >
                 <div class="sidebar-group-content">즐겨찾기 관리</div>
                 <div class="sidebar-group-content">카테고리 설정</div>
               </div>

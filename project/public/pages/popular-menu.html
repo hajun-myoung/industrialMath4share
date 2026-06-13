@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>POPULAR MENU ADMIN</title>
+    <link rel="stylesheet" href="../css/admin.css" />
+    <link rel="stylesheet" href="../index.css" />
+    <script type="module" src="../js/admin-common.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
+  </head>
+  <body data-admin-page="popular-menu">
+    <section class="hero-tablet">
+      <div class="tablet-shell">
+        <div class="tablet-screen">
+          <header>
+            <div class="header-left">
+              <iconify-icon icon="ci:hamburger-lg" width="32"></iconify-icon>
+            </div>
+
+            <div class="header-title">인기메뉴 관리 | 통계</div>
+
+            <div class="header-right">
+              <span><i class="fa-solid fa-shield-halved"></i>안전하게 보호중</span>
+              <i class="fa-solid fa-bell"></i>
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+            </div>
+          </header>
+          <section class="main">
+            <section class="left-sidebar">
+              <div class="sidebar-group">
+                <div class="sidebar-group-title">메뉴</div>
+                <a class="sidebar-group-content" data-nav-page="menu-management" href="./admin.html"
+                  >메뉴 관리</a
+                >
+                <a class="sidebar-group-content" data-nav-page="popular-menu" href="./popular-menu.html"
+                  >인기메뉴 관리</a
+                >
+                <div class="sidebar-group-content">즐겨찾기 관리</div>
+                <div class="sidebar-group-content">카테고리 설정</div>
+              </div>
+              <div class="sidebar-group">
+                <div class="sidebar-group-title">고객·쿠폰·적립</div>
+                <div class="sidebar-group-content">고객 분석</div>
+                <div class="sidebar-group-content">쿠폰 자동 발송</div>
+                <div class="sidebar-group-content">쿠폰 수동 발송</div>
+                <div class="sidebar-group-content">포인트·스탬프</div>
+              </div>
+            </section>
+            <section class="body">
+              <div class="menu-management">
+                <div class="menu-eyebrow">메뉴별 판매 현황</div>
+                <div class="menu-title">
+                  <span>
+                    <i class="fa-solid fa-chart-line"></i>
+                    인기메뉴 관리
+                  </span>
+                </div>
+                <div class="popular-menu-placeholder">
+                  <i class="fa-solid fa-chart-simple"></i>
+                  <strong>준비 중</strong>
+                </div>
+              </div>
+            </section>
+          </section>
+
+          <!-- touch mockup cursor -->
+          <div id="cursor" class="cursor"></div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
