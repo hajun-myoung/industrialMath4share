@@ -5,6 +5,7 @@ const moneyFormatter = new Intl.NumberFormat('ko-KR', {
 });
 
 const numberFormatter = new Intl.NumberFormat('ko-KR');
+const MENU_STATS_PAGE_SIZE = 10;
 
 document.addEventListener('DOMContentLoaded', async () => {
   const message = document.getElementById('analyticsMessage');
@@ -157,47 +158,67 @@ function renderMenuStats(orderDetails, menuStats) {
       .map((menu) => menu.name),
   );
   const menuStatsList = document.getElementById('menuStatsList');
+  const menuStatsPagination = document.getElementById('menuStatsPagination');
   const orderDetailCount = document.getElementById('orderDetailCount');
+  let currentPage = 1;
 
   orderDetailCount.textContent = `${numberFormatter.format(orderDetails.length)}건`;
-  menuStatsList.innerHTML = '';
 
   if (sortedMenuStats.length === 0) {
     const emptyRow = document.createElement('div');
     emptyRow.className = 'analytics-empty-row';
     emptyRow.textContent = '표시할 메뉴별 통계가 없습니다.';
+    menuStatsList.innerHTML = '';
     menuStatsList.appendChild(emptyRow);
+    menuStatsPagination.innerHTML = '';
     return;
   }
 
-  sortedMenuStats.forEach((menu) => {
-    const row = document.createElement('div');
-    const nameCell = document.createElement('div');
-    const nameText = document.createElement('span');
-    const quantityCell = document.createElement('div');
-    const revenueCell = document.createElement('div');
+  function renderPage(page) {
+    const pageCount = Math.ceil(sortedMenuStats.length / MENU_STATS_PAGE_SIZE);
+    const safePage = Math.min(Math.max(page, 1), pageCount);
+    const startIndex = (safePage - 1) * MENU_STATS_PAGE_SIZE;
+    const pageItems = sortedMenuStats.slice(startIndex, startIndex + MENU_STATS_PAGE_SIZE);
 
-    row.className = 'analytics-table-row';
-    nameCell.className = 'analytics-menu-name';
-    nameText.textContent = menu.name;
-    quantityCell.textContent = `${numberFormatter.format(menu.quantity)}개`;
-    revenueCell.textContent = formatMoney(menu.revenue);
+    currentPage = safePage;
+    menuStatsList.innerHTML = '';
+    pageItems.forEach((menu) => {
+      menuStatsList.appendChild(createMenuStatsRow(menu, quantityTopMenuNames, revenueTopMenuNames));
+    });
+    renderMenuStatsPagination(menuStatsPagination, currentPage, pageCount, renderPage);
+  }
 
-    nameCell.appendChild(nameText);
+  renderPage(currentPage);
+}
 
-    if (quantityTopMenuNames.has(menu.name)) {
-      nameCell.appendChild(createStatBadge('주문 TOP', 'order'));
-    }
+function createMenuStatsRow(menu, quantityTopMenuNames, revenueTopMenuNames) {
+  const row = document.createElement('div');
+  const nameCell = document.createElement('div');
+  const nameText = document.createElement('span');
+  const quantityCell = document.createElement('div');
+  const revenueCell = document.createElement('div');
 
-    if (revenueTopMenuNames.has(menu.name)) {
-      nameCell.appendChild(createStatBadge('매출 TOP', 'revenue'));
-    }
+  row.className = 'analytics-table-row';
+  nameCell.className = 'analytics-menu-name';
+  nameText.textContent = menu.name;
+  quantityCell.textContent = `${numberFormatter.format(menu.quantity)}개`;
+  revenueCell.textContent = formatMoney(menu.revenue);
 
-    row.appendChild(nameCell);
-    row.appendChild(quantityCell);
-    row.appendChild(revenueCell);
-    menuStatsList.appendChild(row);
-  });
+  nameCell.appendChild(nameText);
+
+  if (quantityTopMenuNames.has(menu.name)) {
+    nameCell.appendChild(createStatBadge('주문 TOP', 'order'));
+  }
+
+  if (revenueTopMenuNames.has(menu.name)) {
+    nameCell.appendChild(createStatBadge('매출 TOP', 'revenue'));
+  }
+
+  row.appendChild(nameCell);
+  row.appendChild(quantityCell);
+  row.appendChild(revenueCell);
+
+  return row;
 }
 
 function createStatBadge(label, type) {
@@ -205,6 +226,36 @@ function createStatBadge(label, type) {
   badge.className = `top-menu-badge is-${type}`;
   badge.textContent = label;
   return badge;
+}
+
+function renderMenuStatsPagination(container, currentPage, pageCount, onPageChange) {
+  const previousButton = document.createElement('button');
+  const pageStatus = document.createElement('span');
+  const nextButton = document.createElement('button');
+
+  container.innerHTML = '';
+  container.hidden = pageCount <= 1;
+
+  if (pageCount <= 1) return;
+
+  previousButton.type = 'button';
+  previousButton.className = 'pagination-button';
+  previousButton.textContent = '이전';
+  previousButton.disabled = currentPage === 1;
+  previousButton.addEventListener('click', () => onPageChange(currentPage - 1));
+
+  pageStatus.className = 'pagination-status';
+  pageStatus.textContent = `${currentPage} / ${pageCount}`;
+
+  nextButton.type = 'button';
+  nextButton.className = 'pagination-button';
+  nextButton.textContent = '다음';
+  nextButton.disabled = currentPage === pageCount;
+  nextButton.addEventListener('click', () => onPageChange(currentPage + 1));
+
+  container.appendChild(previousButton);
+  container.appendChild(pageStatus);
+  container.appendChild(nextButton);
 }
 
 function renderRankList(listElement, menus, valueType) {

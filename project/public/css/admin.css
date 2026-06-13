@@ -455,6 +455,42 @@ section.main > section.body {
   font-weight: 700;
 }
 
+.table-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.pagination-button {
+  min-width: 64px;
+  height: 36px;
+  border: none;
+  border-radius: 999px;
+  background-color: #f2f4f6;
+  color: #191f28;
+  font-size: 0.9em;
+  font-weight: 800;
+}
+
+.pagination-button:not(:disabled):hover {
+  background-color: rgba(49, 130, 246, 0.1);
+  color: #3182f6;
+}
+
+.pagination-button:disabled {
+  color: rgba(0, 12, 30, 0.25);
+}
+
+.pagination-status {
+  min-width: 48px;
+  color: rgba(0, 12, 30, 0.55);
+  font-size: 0.9em;
+  font-weight: 800;
+  text-align: center;
+}
+
 .rank-list {
   display: flex;
   flex-direction: column;
