@@ -1,5 +1,7 @@
 import { getAllMenus, getAllCategories, createNewMenu, deleteMenu, updateMenu } from './utils.js';
 
+const FAVORITE_MENU_STORAGE_KEY = 'favoriteMenuIds';
+
 let isEditting = false;
 let menu_id = null;
 
@@ -14,6 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const menuList = document.getElementById('menuList');
   const menus = await getAllMenus();
   const categoreis = getAllCategories(menus);
+  const favoriteMenuIds = loadFavoriteMenuIds();
 
   const selectedLanguage = localStorage.getItem('selectedLanguage');
 
@@ -34,7 +37,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     newMenuCategory.innerText = menu.category;
     newMenuPrice.innerText = `₩${Number(menu.price).toLocaleString()}`;
 
-    newMenuTitle.innerText = JSON.parse(menu.name)[selectedLanguage];
+    if (favoriteMenuIds.has(String(menu.id))) {
+      const favoriteIcon = document.createElement('i');
+      favoriteIcon.className = 'fa-solid fa-star menu-favorite-star';
+      favoriteIcon.setAttribute('aria-label', '즐겨찾기 메뉴');
+      newMenuTitle.appendChild(favoriteIcon);
+    }
+
+    newMenuTitle.append(JSON.parse(menu.name)[selectedLanguage]);
     newEditButton.innerHTML = `<i class="fa-regular fa-pen-to-square"></i>수정`;
     newDeleteButton.innerHTML = `<i class="fa-solid fa-trash-can"></i>삭제`;
 
@@ -190,3 +200,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     e.target === modal && (modal.style.display = 'none');
   });
 });
+
+function loadFavoriteMenuIds() {
+  try {
+    const savedValue = localStorage.getItem(FAVORITE_MENU_STORAGE_KEY);
+    const parsedValue = JSON.parse(savedValue || '[]');
+
+    if (!Array.isArray(parsedValue)) return new Set();
+
+    return new Set(parsedValue.map(String));
+  } catch {
+    return new Set();
+  }
+}

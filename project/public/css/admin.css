@@ -839,8 +839,18 @@ section.main > section.body {
 }
 
 .menu-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-weight: 600;
   color: #191f28;
+  min-width: 0;
+}
+
+.menu-favorite-star {
+  flex-shrink: 0;
+  color: #f08c00;
+  font-size: 0.9em;
 }
 
 .menu-category,
