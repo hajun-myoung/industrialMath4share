@@ -183,7 +183,9 @@ function renderMenuStats(orderDetails, menuStats) {
     currentPage = safePage;
     menuStatsList.innerHTML = '';
     pageItems.forEach((menu) => {
-      menuStatsList.appendChild(createMenuStatsRow(menu, quantityTopMenuNames, revenueTopMenuNames));
+      menuStatsList.appendChild(
+        createMenuStatsRow(menu, quantityTopMenuNames, revenueTopMenuNames),
+      );
     });
     renderMenuStatsPagination(menuStatsPagination, currentPage, pageCount, renderPage);
   }

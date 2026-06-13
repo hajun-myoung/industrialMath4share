@@ -564,6 +564,18 @@ section.main > section.body {
   font-weight: 700;
 }
 
+.favorite-ready-panel {
+  margin-top: 18px;
+}
+
+.favorite-ready-text {
+  margin: 0;
+  color: rgba(0, 12, 30, 0.62);
+  font-size: 1em;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
 .bar-chart {
   height: 210px;
   display: grid;
