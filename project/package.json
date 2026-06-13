@@ -5,7 +5,8 @@
     "dev": "node src/data/ensure-db.js && tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "db:init": "node src/data/init-db.js"
+    "db:init": "node src/data/init-db.js",
+    "seed:demo-orders": "node scripts/seed-demo-orders.mjs"
   },
   "dependencies": {
     "@hono/node-server": "^1.19.14",
