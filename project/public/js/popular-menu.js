@@ -12,10 +12,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     const orderDetails = await fetchOrderDetails();
     const normalizedOrders = orderDetails.map(normalizeOrderDetail).filter(Boolean);
+    const menuStats = [...createMenuStats(normalizedOrders).values()];
 
     renderSalesSummary(normalizedOrders);
     renderSalesCharts(normalizedOrders);
-    renderMenuStats(normalizedOrders);
+    renderTopMenuStats(menuStats);
+    renderMenuStats(normalizedOrders, menuStats);
     renderUpdatedAt();
 
     message.textContent =
@@ -97,7 +99,11 @@ function renderSalesSummary(orderDetails) {
   const todaySales = sumRevenue(orderDetails, todayStart, tomorrowStart);
   const weekSales = sumRevenue(orderDetails, weekStart, addDays(weekStart, 7));
   const previousWeekSales = sumRevenue(orderDetails, previousWeekStart, weekStart);
-  const monthSales = sumRevenue(orderDetails, monthStart, new Date(monthStart.getFullYear(), monthStart.getMonth() + 1, 1));
+  const monthSales = sumRevenue(
+    orderDetails,
+    monthStart,
+    new Date(monthStart.getFullYear(), monthStart.getMonth() + 1, 1),
+  );
   const previousMonthSales = sumRevenue(orderDetails, previousMonthStart, monthStart);
 
   document.getElementById('todaySales').textContent = formatMoney(todaySales);
@@ -117,15 +123,29 @@ function renderSalesCharts(orderDetails) {
   renderBarChart(document.getElementById('monthlySalesChart'), monthlyTrend);
 }
 
-function renderMenuStats(orderDetails) {
-  const menuStats = [...createMenuStats(orderDetails).values()].sort((a, b) => b.revenue - a.revenue);
+function renderTopMenuStats(menuStats) {
+  const quantityTopMenus = [...menuStats].sort((a, b) => b.quantity - a.quantity).slice(0, 5);
+  const revenueTopMenus = [...menuStats].sort((a, b) => b.revenue - a.revenue).slice(0, 5);
+
+  renderRankList(document.getElementById('quantityTopList'), quantityTopMenus, 'quantity');
+  renderRankList(document.getElementById('revenueTopList'), revenueTopMenus, 'revenue');
+}
+
+function renderMenuStats(orderDetails, menuStats) {
+  const sortedMenuStats = [...menuStats].sort((a, b) => b.revenue - a.revenue);
+  const quantityTopMenuNames = new Set(
+    [...menuStats]
+      .sort((a, b) => b.quantity - a.quantity)
+      .slice(0, 5)
+      .map((menu) => menu.name),
+  );
   const menuStatsList = document.getElementById('menuStatsList');
   const orderDetailCount = document.getElementById('orderDetailCount');
 
   orderDetailCount.textContent = `${numberFormatter.format(orderDetails.length)}건`;
   menuStatsList.innerHTML = '';
 
-  if (menuStats.length === 0) {
+  if (sortedMenuStats.length === 0) {
     const emptyRow = document.createElement('div');
     emptyRow.className = 'analytics-empty-row';
     emptyRow.textContent = '표시할 메뉴별 통계가 없습니다.';
@@ -133,23 +153,87 @@ function renderMenuStats(orderDetails) {
     return;
   }
 
-  menuStats.forEach((menu) => {
+  sortedMenuStats.forEach((menu) => {
     const row = document.createElement('div');
     const nameCell = document.createElement('div');
+    const nameText = document.createElement('span');
     const quantityCell = document.createElement('div');
     const revenueCell = document.createElement('div');
 
     row.className = 'analytics-table-row';
     nameCell.className = 'analytics-menu-name';
-    nameCell.textContent = menu.name;
+    nameText.textContent = menu.name;
     quantityCell.textContent = `${numberFormatter.format(menu.quantity)}개`;
     revenueCell.textContent = formatMoney(menu.revenue);
+
+    nameCell.appendChild(nameText);
+
+    if (quantityTopMenuNames.has(menu.name)) {
+      const topBadge = document.createElement('span');
+      topBadge.className = 'top-menu-badge';
+      topBadge.textContent = 'TOP 5';
+      nameCell.appendChild(topBadge);
+    }
 
     row.appendChild(nameCell);
     row.appendChild(quantityCell);
     row.appendChild(revenueCell);
     menuStatsList.appendChild(row);
   });
+}
+
+function renderRankList(listElement, menus, valueType) {
+  listElement.innerHTML = '';
+
+  if (menus.length === 0) {
+    const emptyItem = document.createElement('div');
+    emptyItem.className = 'rank-empty';
+    emptyItem.textContent = '표시할 메뉴가 없습니다.';
+    listElement.appendChild(emptyItem);
+    return;
+  }
+
+  const maxValue = Math.max(...menus.map((menu) => getRankValue(menu, valueType)), 1);
+
+  menus.forEach((menu, index) => {
+    const item = document.createElement('div');
+    const rank = document.createElement('div');
+    const content = document.createElement('div');
+    const header = document.createElement('div');
+    const name = document.createElement('div');
+    const value = document.createElement('div');
+    const track = document.createElement('div');
+    const fill = document.createElement('div');
+    const currentValue = getRankValue(menu, valueType);
+
+    item.className = 'rank-item';
+    rank.className = 'rank-number';
+    content.className = 'rank-content';
+    header.className = 'rank-header';
+    name.className = 'rank-name';
+    value.className = 'rank-value';
+    track.className = 'rank-track';
+    fill.className = 'rank-fill';
+
+    rank.textContent = String(index + 1);
+    name.textContent = menu.name;
+    value.textContent =
+      valueType === 'quantity' ? `${numberFormatter.format(menu.quantity)}개` : formatMoney(menu.revenue);
+    fill.style.width = `${Math.max((currentValue / maxValue) * 100, currentValue > 0 ? 6 : 0)}%`;
+
+    header.appendChild(name);
+    header.appendChild(value);
+    track.appendChild(fill);
+    content.appendChild(header);
+    content.appendChild(track);
+    item.appendChild(rank);
+    item.appendChild(content);
+    listElement.appendChild(item);
+  });
+}
+
+function getRankValue(menu, valueType) {
+  return valueType === 'quantity' ? menu.quantity : menu.revenue;
 }
 
 function createDailyRevenueTrend(orderDetails, now) {
