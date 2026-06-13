@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/admin.css" />
     <link rel="stylesheet" href="../index.css" />
     <script type="module" src="../js/admin-common.js"></script>
+    <script type="module" src="../js/favorite-menu.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
@@ -71,17 +72,24 @@
                     즐겨찾기 관리
                   </span>
                 </div>
-                <div class="analytics-panel favorite-ready-panel">
-                  <div class="panel-heading">
-                    <div>
-                      <div class="panel-kicker">로컬 저장 방식 예정</div>
-                      <h2>즐겨찾기 설정 화면 준비중</h2>
-                    </div>
+                <div class="favorite-summary">
+                  <div>
+                    <div class="favorite-summary-label">선택된 즐겨찾기</div>
+                    <div class="favorite-summary-value" id="favoriteCount">0개</div>
                   </div>
-                  <p class="favorite-ready-text">
-                    다음 단계에서 모든 메뉴를 불러와 즐겨찾기를 선택하고, 브라우저 로컬
-                    스토리지에 저장하도록 연결합니다.
-                  </p>
+                  <button class="favorite-reset-button" id="favoriteResetButton" type="button">
+                    전체 해제
+                  </button>
+                </div>
+                <div class="favorite-message" id="favoriteMessage">메뉴를 불러오는 중입니다.</div>
+                <div class="favorite-table">
+                  <div class="favorite-table-header">
+                    <div>즐겨찾기</div>
+                    <div>메뉴명(한글)</div>
+                    <div>카테고리</div>
+                    <div>가격</div>
+                  </div>
+                  <div class="favorite-list" id="favoriteMenuList"></div>
                 </div>
               </div>
             </section>
