@@ -131,8 +131,14 @@ async function submitOrder() {
       throw new Error('주문 전송 실패');
     }
 
+    const orderResult = await response.json();
+    const orderId = orderResult?.orderId;
+    const completePageUrl = orderId
+      ? `./checkout-complete.html?orderId=${encodeURIComponent(orderId)}`
+      : './checkout-complete.html';
+
     resetCheckoutSession();
-    window.location.href = './checkout-complete.html';
+    window.location.href = completePageUrl;
   } catch {
     setMessage('결제 요청에 실패했습니다. 잠시 후 다시 시도해 주세요.', 'error');
     setSubmitting(false);

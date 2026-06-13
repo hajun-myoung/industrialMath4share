@@ -67,5 +67,13 @@ export async function createOrder(orderPayload) {
     body: JSON.stringify(orderPayload),
   });
 
+  // const waiter = new Promise((res) => {
+  //   setTimeout(() => {
+  //     res();
+  //   }, 3000);
+  // });
+
+  // await waiter();
+
   return res;
 }

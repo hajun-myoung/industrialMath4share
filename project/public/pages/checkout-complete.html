@@ -19,11 +19,21 @@
               </svg>
             </div>
             <h1 id="complete-title">주문이 완료되었습니다</h1>
+            <p id="order-number" class="order-number" hidden></p>
             <p>잠시만 기다려 주세요.</p>
             <a class="home-button" href="../index.html">처음 화면으로 돌아가기</a>
           </div>
         </main>
       </div>
     </div>
+    <script>
+      const orderId = new URLSearchParams(window.location.search).get('orderId');
+      const orderNumberElement = document.getElementById('order-number');
+
+      if (orderId && orderNumberElement) {
+        orderNumberElement.innerText = `주문번호: ${orderId}`;
+        orderNumberElement.hidden = false;
+      }
+    </script>
   </body>
 </html>
