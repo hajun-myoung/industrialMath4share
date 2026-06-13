@@ -6,6 +6,7 @@ console.log('order.js');
 let shoppingCart = {};
 let sheetCloseTimer = null;
 
+const FAVORITE_MENU_STORAGE_KEY = 'favoriteMenuIds';
 const SHEET_TRANSITION_MS = 220;
 
 function formatPrice(price) {
@@ -205,9 +206,23 @@ function getDisplayName(menu, language) {
   }
 }
 
+function loadFavoriteMenuIds() {
+  try {
+    const savedValue = localStorage.getItem(FAVORITE_MENU_STORAGE_KEY);
+    const parsedValue = JSON.parse(savedValue || '[]');
+
+    if (!Array.isArray(parsedValue)) return new Set();
+
+    return new Set(parsedValue.map(String));
+  } catch {
+    return new Set();
+  }
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   const menuList = document.getElementById('menuList');
   const menus = (await getAllMenus()) ?? [];
+  const favoriteMenuIds = loadFavoriteMenuIds();
 
   //   console.log(menus);
   const categories = menus.reduce((categories, curr) => {
@@ -302,6 +317,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       newImageEle.alt = displayName;
       newImageWrapper.appendChild(newImageEle);
       newImageWrapper.className = 'menu-card-image';
+
+      if (favoriteMenuIds.has(String(menu.id))) {
+        const recommendationBadge = document.createElement('div');
+        recommendationBadge.className = 'recommended-menu-badge';
+        recommendationBadge.innerText = '추천 메뉴';
+        newImageWrapper.appendChild(recommendationBadge);
+      }
 
       newMenuName.innerText = displayName;
       newMenuName.className = 'menu-card-name';
