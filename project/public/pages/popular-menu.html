@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/admin.css" />
     <link rel="stylesheet" href="../index.css" />
     <script type="module" src="../js/admin-common.js"></script>
+    <script type="module" src="../js/popular-menu.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
@@ -55,18 +56,53 @@
               </div>
             </section>
             <section class="body">
-              <div class="menu-management">
-                <div class="menu-eyebrow">메뉴별 판매 현황</div>
-                <div class="menu-title">
-                  <span>
-                    <i class="fa-solid fa-chart-line"></i>
-                    인기메뉴 관리
-                  </span>
+              <div class="analytics-page">
+                <div class="analytics-hero">
+                  <div>
+                    <div class="menu-eyebrow">메뉴별 판매 현황</div>
+                    <div class="analytics-title">인기메뉴 관리</div>
+                  </div>
+                  <div class="analytics-date" id="analyticsUpdatedAt">-</div>
                 </div>
-                <div class="popular-menu-placeholder">
-                  <i class="fa-solid fa-chart-simple"></i>
-                  <strong>준비 중</strong>
-                </div>
+
+                <div class="analytics-message" id="analyticsMessage">주문 데이터를 불러오는 중입니다.</div>
+
+                <section class="sales-summary" aria-label="매출 통계">
+                  <article class="sales-card">
+                    <div class="sales-card-label">오늘 매출</div>
+                    <div class="sales-card-value" id="todaySales">₩0</div>
+                    <div class="sales-card-meta">오늘 00:00부터 현재까지</div>
+                  </article>
+                  <article class="sales-card">
+                    <div class="sales-card-label">이번주 매출</div>
+                    <div class="sales-card-value" id="weekSales">₩0</div>
+                    <div class="sales-card-trend" id="weekTrend">전주 대비 0%</div>
+                  </article>
+                  <article class="sales-card">
+                    <div class="sales-card-label">이번달 매출</div>
+                    <div class="sales-card-value" id="monthSales">₩0</div>
+                    <div class="sales-card-trend" id="monthTrend">전월 대비 0%</div>
+                  </article>
+                </section>
+
+                <section class="analytics-panel" aria-label="메뉴별 통계">
+                  <div class="panel-heading">
+                    <div>
+                      <div class="panel-kicker">전체 주문 상세 기준</div>
+                      <h2>메뉴별 통계</h2>
+                    </div>
+                    <span id="orderDetailCount">0건</span>
+                  </div>
+
+                  <div class="analytics-table">
+                    <div class="analytics-table-header">
+                      <div>메뉴명</div>
+                      <div>판매수량</div>
+                      <div>매출</div>
+                    </div>
+                    <div id="menuStatsList"></div>
+                  </div>
+                </section>
               </div>
             </section>
           </section>
