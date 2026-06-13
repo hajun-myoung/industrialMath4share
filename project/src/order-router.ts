@@ -1,6 +1,11 @@
 import { Hono } from 'hono';
 import type { OrderDetailInput } from './data/model.js';
-import { createOrder, createOrderDetail, getMenuByMenuId } from './data/queries.js';
+import {
+  createOrder,
+  createOrderDetail,
+  getAllOrderDetails,
+  getMenuByMenuId,
+} from './data/queries.js';
 import { nanoid } from 'nanoid';
 import { HTTPException } from 'hono/http-exception';
 const app = new Hono();
@@ -42,4 +47,11 @@ app.post('/', async (c) => {
     orderDetails: newOrderDetails,
   });
 });
+
+// get all orders
+app.get('/', (c) => {
+  const menus = getAllOrderDetails();
+  return c.json(menus);
+});
+
 export default app;

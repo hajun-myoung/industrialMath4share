@@ -43,6 +43,15 @@ const getAllMenus = () =>
   `,
     )
     .all() as unknown as MenuResponse[];
+const getAllOrderDetails = () =>
+  db
+    .prepare(
+      `
+  SELECT order_detail_id AS id, menu_name, price, quantity, created_at
+  FROM ${TABLE_NAMES.order_details}
+  `,
+    )
+    .all() as unknown as MenuResponse[];
 const getMenuByMenuId = (menuId: string) =>
   db
     .prepare(
@@ -114,6 +123,7 @@ export {
   createOrder,
   createOrderDetail,
   getAllMenus,
+  getAllOrderDetails,
   getMenuByMenuId,
   removeMenuById,
   updateMenuById,
