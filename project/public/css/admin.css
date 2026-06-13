@@ -528,13 +528,6 @@ section.main > section.body {
   gap: 10px;
 }
 
-.compact-bar-chart {
-  gap: 5px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding-bottom: 4px;
-}
-
 .bar-chart-item {
   min-width: 0;
   height: 100%;
@@ -556,26 +549,6 @@ section.main > section.body {
   text-overflow: ellipsis;
 }
 
-.compact-bar-chart .bar-chart-value,
-.compact-bar-chart .bar-chart-label {
-  overflow: visible;
-  font-size: 0.68em;
-  text-overflow: clip;
-}
-
-.compact-bar-chart .bar-chart-item {
-  min-width: 36px;
-}
-
-.compact-bar-chart::-webkit-scrollbar {
-  height: 6px;
-}
-
-.compact-bar-chart::-webkit-scrollbar-thumb {
-  border-radius: 999px;
-  background-color: rgba(0, 12, 30, 0.16);
-}
-
 .bar-chart-track {
   position: relative;
   width: 100%;
@@ -594,6 +567,70 @@ section.main > section.body {
   min-height: 0;
   border-radius: 999px;
   background: linear-gradient(180deg, #4593fc 0%, #3182f6 100%);
+}
+
+.line-chart {
+  width: 100%;
+  height: 236px;
+}
+
+.line-chart svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.line-chart-baseline {
+  stroke: rgba(0, 12, 30, 0.08);
+  stroke-width: 2;
+}
+
+.line-chart-area {
+  fill: rgba(49, 130, 246, 0.08);
+}
+
+.line-chart-line {
+  fill: none;
+  stroke: #3182f6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 4;
+}
+
+.line-chart-marker {
+  stroke: #fff;
+  stroke-width: 3;
+}
+
+.line-chart-marker.is-high {
+  fill: #3182f6;
+}
+
+.line-chart-marker.is-low {
+  fill: #8b95a1;
+}
+
+.line-chart-point-label {
+  fill: #ff3b3b;
+  /* font-size: 17px; */
+  font-size: 2.5em;
+  font-weight: 900;
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 4;
+  text-anchor: middle;
+}
+
+.line-chart-point-label.is-low {
+  fill: rgb(48, 89, 255);
+}
+
+.line-chart-axis-label {
+  fill: rgba(0, 12, 30, 0.45);
+  font-size: 2em;
+  font-weight: 800;
+  text-anchor: middle;
 }
 
 /* 여기서부턴 테이블 내용(헤더 말고)임 */

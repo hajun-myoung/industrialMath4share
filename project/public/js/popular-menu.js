@@ -130,7 +130,7 @@ function renderOrderTimeCharts(orderDetails) {
   const hourlyOrders = createHourlyOrderCountTrend(orderDetails);
   const weekdaySales = createWeekdayRevenueTrend(orderDetails);
 
-  renderBarChart(document.getElementById('hourlyOrderChart'), hourlyOrders, formatCount);
+  renderLineChart(document.getElementById('hourlyOrderChart'), hourlyOrders, formatCount);
   renderBarChart(document.getElementById('weekdaySalesChart'), weekdaySales);
 }
 
@@ -284,7 +284,7 @@ function createHourlyOrderCountTrend(orderDetails) {
     }, 0);
 
     return {
-      label: `${String(hour).padStart(2, '0')}시`,
+      label: `${String(hour)}`,
       value: orderCount,
     };
   });
@@ -306,9 +306,120 @@ function createWeekdayRevenueTrend(orderDetails) {
   });
 }
 
+function renderLineChart(chartElement, chartData, valueFormatter = formatCompactMoney) {
+  const width = 720;
+  const height = 508;
+  const padding = { top: 18, right: 18, bottom: 28, left: 18 };
+  const innerWidth = width - padding.left - padding.right;
+  const innerHeight = height - padding.top - padding.bottom;
+  const actualMaxValue = Math.max(...chartData.map((item) => item.value));
+  const maxValue = Math.max(actualMaxValue, 1);
+  const positiveValues = chartData.map((item) => item.value).filter((value) => value > 0);
+  const minPositiveValue = positiveValues.length > 0 ? Math.min(...positiveValues) : null;
+  const points = chartData.map((item, index) => {
+    const x = padding.left + (innerWidth / (chartData.length - 1)) * index;
+    const y = padding.top + innerHeight - (item.value / maxValue) * innerHeight;
+    return { ...item, x, y };
+  });
+  const highestPoint = points.find((point) => point.value === actualMaxValue);
+  const lowestPoint =
+    minPositiveValue === null ? null : points.find((point) => point.value === minPositiveValue);
+
+  chartElement.innerHTML = '';
+
+  const svg = createSvgElement('svg');
+  svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+  svg.setAttribute('role', 'img');
+  svg.setAttribute('aria-label', '시간대별 주문 건수 선그래프');
+
+  const baseline = createSvgElement('line');
+  baseline.setAttribute('class', 'line-chart-baseline');
+  baseline.setAttribute('x1', String(padding.left));
+  baseline.setAttribute('x2', String(width - padding.right));
+  baseline.setAttribute('y1', String(height - padding.bottom));
+  baseline.setAttribute('y2', String(height - padding.bottom));
+  svg.appendChild(baseline);
+
+  const area = createSvgElement('path');
+  area.setAttribute('class', 'line-chart-area');
+  area.setAttribute('d', createAreaPath(points, height - padding.bottom));
+  svg.appendChild(area);
+
+  const path = createSvgElement('path');
+  path.setAttribute('class', 'line-chart-line');
+  path.setAttribute('d', createSmoothPath(points));
+  svg.appendChild(path);
+
+  points.forEach((point, index) => {
+    if (index % 3 !== 0 && index !== points.length - 1) return;
+
+    const label = createSvgElement('text');
+    label.setAttribute('class', 'line-chart-axis-label');
+    label.setAttribute('x', String(point.x));
+    label.setAttribute('y', String(height + 10));
+    label.textContent = point.label;
+    svg.appendChild(label);
+  });
+
+  const highlightPoints =
+    highestPoint === lowestPoint || !lowestPoint ? [highestPoint] : [lowestPoint, highestPoint];
+
+  highlightPoints.forEach((point) => {
+    if (!point || point.value === 0) return;
+
+    const marker = createSvgElement('circle');
+    const label = createSvgElement('text');
+
+    marker.setAttribute(
+      'class',
+      point === highestPoint ? 'line-chart-marker is-high' : 'line-chart-marker is-low',
+    );
+    marker.setAttribute('cx', String(point.x));
+    marker.setAttribute('cy', String(point.y));
+    marker.setAttribute('r', '5');
+
+    label.setAttribute(
+      'class',
+      point === highestPoint ? 'line-chart-point-label is-high' : 'line-chart-point-label is-low',
+    );
+    label.setAttribute('x', String(point.x));
+    label.setAttribute('y', String(point.y + (point.y < 42 ? 24 : -14)));
+    label.textContent = valueFormatter(point.value);
+
+    svg.appendChild(marker);
+    svg.appendChild(label);
+  });
+
+  chartElement.appendChild(svg);
+}
+
+function createSmoothPath(points) {
+  return points.reduce((path, point, index) => {
+    if (index === 0) return `M ${point.x} ${point.y}`;
+
+    const previousPoint = points[index - 1];
+    const controlX = (previousPoint.x + point.x) / 2;
+    return `${path} C ${controlX} ${previousPoint.y}, ${controlX} ${point.y}, ${point.x} ${point.y}`;
+  }, '');
+}
+
+function createAreaPath(points, baselineY) {
+  const linePath = createSmoothPath(points);
+  const firstPoint = points[0];
+  const lastPoint = points[points.length - 1];
+
+  return `${linePath} L ${lastPoint.x} ${baselineY} L ${firstPoint.x} ${baselineY} Z`;
+}
+
+function createSvgElement(tagName) {
+  return document.createElementNS('http://www.w3.org/2000/svg', tagName);
+}
+
 function renderBarChart(chartElement, chartData, valueFormatter = formatCompactMoney) {
   const maxValue = Math.max(...chartData.map((item) => item.value), 1);
-  const columnWidth = chartElement.classList.contains('compact-bar-chart') ? 'minmax(36px, 1fr)' : 'minmax(0, 1fr)';
+  const columnWidth = chartElement.classList.contains('compact-bar-chart')
+    ? 'minmax(36px, 1fr)'
+    : 'minmax(0, 1fr)';
 
   chartElement.innerHTML = '';
   chartElement.style.gridTemplateColumns = `repeat(${chartData.length}, ${columnWidth})`;
