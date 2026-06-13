@@ -351,6 +351,12 @@ section.main > section.body {
   padding: 20px;
 }
 
+.sales-chart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
 .panel-heading {
   display: flex;
   justify-content: space-between;
@@ -413,6 +419,55 @@ section.main > section.body {
   color: rgba(0, 12, 30, 0.45);
   text-align: center;
   font-weight: 700;
+}
+
+.bar-chart {
+  height: 210px;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  align-items: end;
+  gap: 10px;
+}
+
+.bar-chart-item {
+  min-width: 0;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 24px 1fr 22px;
+  gap: 8px;
+  align-items: end;
+}
+
+.bar-chart-value,
+.bar-chart-label {
+  overflow: hidden;
+  color: rgba(0, 12, 30, 0.45);
+  font-size: 0.78em;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.bar-chart-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 132px;
+  border-radius: 999px;
+  background-color: #f2f4f6;
+  overflow: hidden;
+}
+
+.bar-chart-fill {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  min-height: 0;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #4593fc 0%, #3182f6 100%);
 }
 
 /* 여기서부턴 테이블 내용(헤더 말고)임 */

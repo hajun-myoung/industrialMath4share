@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const normalizedOrders = orderDetails.map(normalizeOrderDetail).filter(Boolean);
 
     renderSalesSummary(normalizedOrders);
+    renderSalesCharts(normalizedOrders);
     renderMenuStats(normalizedOrders);
     renderUpdatedAt();
 
@@ -107,6 +108,15 @@ function renderSalesSummary(orderDetails) {
   renderTrend(document.getElementById('monthTrend'), '전월 대비', monthSales, previousMonthSales);
 }
 
+function renderSalesCharts(orderDetails) {
+  const now = new Date();
+  const dailyTrend = createDailyRevenueTrend(orderDetails, now);
+  const monthlyTrend = createMonthlyRevenueTrend(orderDetails, now);
+
+  renderBarChart(document.getElementById('dailySalesChart'), dailyTrend);
+  renderBarChart(document.getElementById('monthlySalesChart'), monthlyTrend);
+}
+
 function renderMenuStats(orderDetails) {
   const menuStats = [...createMenuStats(orderDetails).values()].sort((a, b) => b.revenue - a.revenue);
   const menuStatsList = document.getElementById('menuStatsList');
@@ -139,6 +149,64 @@ function renderMenuStats(orderDetails) {
     row.appendChild(quantityCell);
     row.appendChild(revenueCell);
     menuStatsList.appendChild(row);
+  });
+}
+
+function createDailyRevenueTrend(orderDetails, now) {
+  return Array.from({ length: 7 }, (_, index) => {
+    const dayStart = addDays(startOfDay(now), index - 6);
+    const nextDayStart = addDays(dayStart, 1);
+    const label = new Intl.DateTimeFormat('ko-KR', {
+      weekday: 'short',
+    }).format(dayStart);
+
+    return {
+      label,
+      value: sumRevenue(orderDetails, dayStart, nextDayStart),
+    };
+  });
+}
+
+function createMonthlyRevenueTrend(orderDetails, now) {
+  return Array.from({ length: 6 }, (_, index) => {
+    const monthStart = new Date(now.getFullYear(), now.getMonth() - 5 + index, 1);
+    const nextMonthStart = new Date(monthStart.getFullYear(), monthStart.getMonth() + 1, 1);
+
+    return {
+      label: `${monthStart.getMonth() + 1}월`,
+      value: sumRevenue(orderDetails, monthStart, nextMonthStart),
+    };
+  });
+}
+
+function renderBarChart(chartElement, chartData) {
+  const maxValue = Math.max(...chartData.map((item) => item.value), 1);
+
+  chartElement.innerHTML = '';
+  chartElement.style.gridTemplateColumns = `repeat(${chartData.length}, minmax(0, 1fr))`;
+
+  chartData.forEach((item) => {
+    const barItem = document.createElement('div');
+    const barValue = document.createElement('div');
+    const barTrack = document.createElement('div');
+    const barFill = document.createElement('div');
+    const barLabel = document.createElement('div');
+
+    barItem.className = 'bar-chart-item';
+    barValue.className = 'bar-chart-value';
+    barTrack.className = 'bar-chart-track';
+    barFill.className = 'bar-chart-fill';
+    barLabel.className = 'bar-chart-label';
+
+    barFill.style.height = `${Math.max((item.value / maxValue) * 100, item.value > 0 ? 8 : 0)}%`;
+    barValue.textContent = formatCompactMoney(item.value);
+    barLabel.textContent = item.label;
+
+    barTrack.appendChild(barFill);
+    barItem.appendChild(barValue);
+    barItem.appendChild(barTrack);
+    barItem.appendChild(barLabel);
+    chartElement.appendChild(barItem);
   });
 }
 
@@ -225,4 +293,9 @@ function addDays(date, days) {
 
 function formatMoney(value) {
   return moneyFormatter.format(value);
+}
+
+function formatCompactMoney(value) {
+  if (value >= 10_000) return `${numberFormatter.format(Math.round(value / 10_000))}만`;
+  return `${numberFormatter.format(value)}`;
 }
