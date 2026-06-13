@@ -41,7 +41,10 @@
                 <a class="sidebar-group-content" data-nav-page="menu-management" href="./admin.html"
                   >메뉴 관리</a
                 >
-                <a class="sidebar-group-content" data-nav-page="popular-menu" href="./popular-menu.html"
+                <a
+                  class="sidebar-group-content"
+                  data-nav-page="popular-menu"
+                  href="./popular-menu.html"
                   >인기메뉴 관리</a
                 >
                 <div class="sidebar-group-content">즐겨찾기 관리</div>
@@ -65,7 +68,9 @@
                   <div class="analytics-date" id="analyticsUpdatedAt">-</div>
                 </div>
 
-                <div class="analytics-message" id="analyticsMessage">주문 데이터를 불러오는 중입니다.</div>
+                <div class="analytics-message" id="analyticsMessage">
+                  주문 데이터를 불러오는 중입니다.
+                </div>
 
                 <section class="sales-summary" aria-label="매출 통계">
                   <article class="sales-card">
@@ -104,6 +109,28 @@
                       </div>
                     </div>
                     <div class="bar-chart" id="monthlySalesChart"></div>
+                  </article>
+                </section>
+
+                <section class="sales-chart-grid" aria-label="시간대와 요일 통계">
+                  <article class="analytics-panel">
+                    <div class="panel-heading">
+                      <div>
+                        <div class="panel-kicker">전체 주문 상세 기준</div>
+                        <h2>시간대별 주문 건수</h2>
+                      </div>
+                    </div>
+                    <div class="bar-chart compact-bar-chart" id="hourlyOrderChart"></div>
+                  </article>
+
+                  <article class="analytics-panel">
+                    <div class="panel-heading">
+                      <div>
+                        <div class="panel-kicker">전체 주문 상세 기준</div>
+                        <h2>요일별 매출</h2>
+                      </div>
+                    </div>
+                    <div class="bar-chart" id="weekdaySalesChart"></div>
                   </article>
                 </section>
 

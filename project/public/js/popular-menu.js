@@ -16,12 +16,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     renderSalesSummary(normalizedOrders);
     renderSalesCharts(normalizedOrders);
+    renderOrderTimeCharts(normalizedOrders);
     renderTopMenuStats(menuStats);
     renderMenuStats(normalizedOrders, menuStats);
     renderUpdatedAt();
 
     message.textContent =
-      normalizedOrders.length > 0 ? '주문 데이터가 최신 상태입니다.' : '아직 집계할 주문 데이터가 없습니다.';
+      normalizedOrders.length > 0
+        ? '주문 데이터가 최신 상태입니다.'
+        : '아직 집계할 주문 데이터가 없습니다.';
     message.classList.toggle('is-empty', normalizedOrders.length === 0);
   } catch (error) {
     console.error(error);
@@ -123,6 +126,14 @@ function renderSalesCharts(orderDetails) {
   renderBarChart(document.getElementById('monthlySalesChart'), monthlyTrend);
 }
 
+function renderOrderTimeCharts(orderDetails) {
+  const hourlyOrders = createHourlyOrderCountTrend(orderDetails);
+  const weekdaySales = createWeekdayRevenueTrend(orderDetails);
+
+  renderBarChart(document.getElementById('hourlyOrderChart'), hourlyOrders, formatCount);
+  renderBarChart(document.getElementById('weekdaySalesChart'), weekdaySales);
+}
+
 function renderTopMenuStats(menuStats) {
   const quantityTopMenus = [...menuStats].sort((a, b) => b.quantity - a.quantity).slice(0, 5);
   const revenueTopMenus = [...menuStats].sort((a, b) => b.revenue - a.revenue).slice(0, 5);
@@ -218,7 +229,9 @@ function renderRankList(listElement, menus, valueType) {
     rank.textContent = String(index + 1);
     name.textContent = menu.name;
     value.textContent =
-      valueType === 'quantity' ? `${numberFormatter.format(menu.quantity)}개` : formatMoney(menu.revenue);
+      valueType === 'quantity'
+        ? `${numberFormatter.format(menu.quantity)}개`
+        : formatMoney(menu.revenue);
     fill.style.width = `${Math.max((currentValue / maxValue) * 100, currentValue > 0 ? 6 : 0)}%`;
 
     header.appendChild(name);
@@ -263,11 +276,42 @@ function createMonthlyRevenueTrend(orderDetails, now) {
   });
 }
 
-function renderBarChart(chartElement, chartData) {
+function createHourlyOrderCountTrend(orderDetails) {
+  return Array.from({ length: 24 }, (_, hour) => {
+    const orderCount = orderDetails.reduce((count, orderDetail) => {
+      const orderHour = new Date(orderDetail.createdAt).getHours();
+      return orderHour === hour ? count + 1 : count;
+    }, 0);
+
+    return {
+      label: `${String(hour).padStart(2, '0')}시`,
+      value: orderCount,
+    };
+  });
+}
+
+function createWeekdayRevenueTrend(orderDetails) {
+  const weekdayLabels = ['일', '월', '화', '수', '목', '금', '토'];
+
+  return weekdayLabels.map((label, weekdayIndex) => {
+    const revenue = orderDetails.reduce((total, orderDetail) => {
+      const orderWeekday = new Date(orderDetail.createdAt).getDay();
+      return orderWeekday === weekdayIndex ? total + orderDetail.revenue : total;
+    }, 0);
+
+    return {
+      label,
+      value: revenue,
+    };
+  });
+}
+
+function renderBarChart(chartElement, chartData, valueFormatter = formatCompactMoney) {
   const maxValue = Math.max(...chartData.map((item) => item.value), 1);
+  const columnWidth = chartElement.classList.contains('compact-bar-chart') ? 'minmax(36px, 1fr)' : 'minmax(0, 1fr)';
 
   chartElement.innerHTML = '';
-  chartElement.style.gridTemplateColumns = `repeat(${chartData.length}, minmax(0, 1fr))`;
+  chartElement.style.gridTemplateColumns = `repeat(${chartData.length}, ${columnWidth})`;
 
   chartData.forEach((item) => {
     const barItem = document.createElement('div');
@@ -283,7 +327,7 @@ function renderBarChart(chartElement, chartData) {
     barLabel.className = 'bar-chart-label';
 
     barFill.style.height = `${Math.max((item.value / maxValue) * 100, item.value > 0 ? 8 : 0)}%`;
-    barValue.textContent = formatCompactMoney(item.value);
+    barValue.textContent = valueFormatter(item.value);
     barLabel.textContent = item.label;
 
     barTrack.appendChild(barFill);
@@ -382,4 +426,8 @@ function formatMoney(value) {
 function formatCompactMoney(value) {
   if (value >= 10_000) return `${numberFormatter.format(Math.round(value / 10_000))}만`;
   return `${numberFormatter.format(value)}`;
+}
+
+function formatCount(value) {
+  return `${numberFormatter.format(value)}건`;
 }

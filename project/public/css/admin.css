@@ -528,6 +528,13 @@ section.main > section.body {
   gap: 10px;
 }
 
+.compact-bar-chart {
+  gap: 5px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 4px;
+}
+
 .bar-chart-item {
   min-width: 0;
   height: 100%;
@@ -547,6 +554,26 @@ section.main > section.body {
   text-align: center;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.compact-bar-chart .bar-chart-value,
+.compact-bar-chart .bar-chart-label {
+  overflow: visible;
+  font-size: 0.68em;
+  text-overflow: clip;
+}
+
+.compact-bar-chart .bar-chart-item {
+  min-width: 36px;
+}
+
+.compact-bar-chart::-webkit-scrollbar {
+  height: 6px;
+}
+
+.compact-bar-chart::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background-color: rgba(0, 12, 30, 0.16);
 }
 
 .bar-chart-track {
