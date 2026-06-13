@@ -1,4 +1,4 @@
-import { createOrder } from './utils';
+import { createOrder } from './utils.js';
 
 const CHECKOUT_DRAFT_KEY = 'checkoutDraft';
 
