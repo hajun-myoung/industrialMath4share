@@ -150,6 +150,12 @@ function renderMenuStats(orderDetails, menuStats) {
       .slice(0, 5)
       .map((menu) => menu.name),
   );
+  const revenueTopMenuNames = new Set(
+    [...menuStats]
+      .sort((a, b) => b.revenue - a.revenue)
+      .slice(0, 5)
+      .map((menu) => menu.name),
+  );
   const menuStatsList = document.getElementById('menuStatsList');
   const orderDetailCount = document.getElementById('orderDetailCount');
 
@@ -180,10 +186,11 @@ function renderMenuStats(orderDetails, menuStats) {
     nameCell.appendChild(nameText);
 
     if (quantityTopMenuNames.has(menu.name)) {
-      const topBadge = document.createElement('span');
-      topBadge.className = 'top-menu-badge';
-      topBadge.textContent = 'TOP 5';
-      nameCell.appendChild(topBadge);
+      nameCell.appendChild(createStatBadge('주문 TOP', 'order'));
+    }
+
+    if (revenueTopMenuNames.has(menu.name)) {
+      nameCell.appendChild(createStatBadge('매출 TOP', 'revenue'));
     }
 
     row.appendChild(nameCell);
@@ -191,6 +198,13 @@ function renderMenuStats(orderDetails, menuStats) {
     row.appendChild(revenueCell);
     menuStatsList.appendChild(row);
   });
+}
+
+function createStatBadge(label, type) {
+  const badge = document.createElement('span');
+  badge.className = `top-menu-badge is-${type}`;
+  badge.textContent = label;
+  return badge;
 }
 
 function renderRankList(listElement, menus, valueType) {

@@ -433,10 +433,18 @@ section.main > section.body {
   flex-shrink: 0;
   padding: 4px 7px;
   border-radius: 999px;
-  background-color: rgba(49, 130, 246, 0.1);
-  color: #3182f6;
   font-size: 0.72em;
   font-weight: 900;
+}
+
+.top-menu-badge.is-order {
+  background-color: rgba(49, 130, 246, 0.1);
+  color: #3182f6;
+}
+
+.top-menu-badge.is-revenue {
+  background-color: rgba(240, 62, 62, 0.1);
+  color: #f03e3e;
 }
 
 .analytics-empty-row {
