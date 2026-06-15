@@ -19,10 +19,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     renderFavoriteCount(count, favoriteMenuIds.size);
-    message.textContent =
+    message.innerHTML =
       menus.length > 0
-        ? '즐겨찾기 설정은 이 브라우저의 로컬 스토리지에 저장됩니다.'
-        : '등록된 메뉴가 없습니다.';
+        ? `<i class="fa fa-info-circle" aria-hidden="true"></i>즐겨찾기 설정은 이 브라우저의 로컬 스토리지에 저장됩니다.`
+        : `<i class="fa-regular fa-face-frown"></i>등록된 메뉴가 없습니다.`;
     message.classList.toggle('is-empty', menus.length === 0);
 
     resetButton.addEventListener('click', () => {

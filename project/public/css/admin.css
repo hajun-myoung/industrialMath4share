@@ -100,6 +100,7 @@ button {
 
 .tablet-shell {
   position: relative;
+  min-width: 1316px;
   width: min(80vw, 1436px);
   aspect-ratio: 1536 / 1024; /* kiosk-shell image ratio */
 
@@ -620,6 +621,11 @@ section.main > section.body {
   font-weight: 700;
 }
 
+.favorite-message.info-message {
+  background-color: rgba(49, 246, 72, 0.285);
+  color: #1fa032;
+}
+
 .favorite-message.is-empty {
   background-color: rgba(139, 149, 161, 0.12);
   color: rgba(0, 12, 30, 0.55);
@@ -1044,4 +1050,18 @@ input.additional-gap {
 
   width: 100%;
   height: 3em;
+}
+
+.recommended-menu-badge {
+  top: 8px;
+  left: 8px;
+  z-index: 1;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background-color: rgba(25, 31, 40, 0.82);
+  color: #fff;
+  font-size: 0.72em;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
 }
