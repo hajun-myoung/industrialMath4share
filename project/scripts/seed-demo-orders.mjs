@@ -7,8 +7,8 @@ const __dirname = path.dirname(__filename);
 
 const API_BASE_URL = process.env.API_BASE_URL ?? 'http://localhost:3000';
 const DB_PATH = path.join(__dirname, '..', 'src', 'data', 'main.db');
-const LAST_MONTH_ORDER_COUNT = Number(process.env.LAST_MONTH_ORDER_COUNT ?? 120);
-const THIS_MONTH_ORDER_COUNT = Number(process.env.THIS_MONTH_ORDER_COUNT ?? 90);
+const MONTH_ORDER_COUNTS = [60, 80, 100, 120, 120, 90];
+const RESET_ORDERS = process.env.RESET_ORDERS === 'true';
 
 const db = new DatabaseSync(DB_PATH);
 
@@ -24,34 +24,50 @@ const updateOrderDetailTime = db.prepare(`
   WHERE order_detail_id = ?
 `);
 
+const deleteOrderDetails = db.prepare(`
+  DELETE FROM order_details
+`);
+
+const deleteOrders = db.prepare(`
+  DELETE FROM orders
+`);
+
 const menus = await fetchMenus();
 const weightedMenus = createWeightedMenus(menus);
+if (RESET_ORDERS) {
+  resetOrders();
+}
 const now = new Date();
-const lastMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-const lastMonthEnd = new Date(now.getFullYear(), now.getMonth(), 0);
-const thisMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
 
 let createdCount = 0;
 
-createdCount += await seedOrders({
-  count: LAST_MONTH_ORDER_COUNT,
-  startDate: lastMonthStart,
-  endDate: lastMonthEnd,
-  weightedMenus,
-});
+for (let monthOffset = 5; monthOffset >= 0; monthOffset -= 1) {
+  const count = MONTH_ORDER_COUNTS[5 - monthOffset];
+  const startDate = new Date(now.getFullYear(), now.getMonth() - monthOffset, 1);
+  const endDate =
+    monthOffset === 0 ? now : new Date(now.getFullYear(), now.getMonth() - monthOffset + 1, 0);
 
-createdCount += await seedOrders({
-  count: THIS_MONTH_ORDER_COUNT,
-  startDate: thisMonthStart,
-  endDate: now,
-  weightedMenus,
-});
+  createdCount += await seedOrders({
+    count,
+    startDate,
+    endDate,
+    weightedMenus,
+  });
+
+  console.log(
+    `[INFO] ${monthOffset} month(s) ago: ${formatDate(startDate)} ~ ${formatDate(endDate)} / ${count} orders`,
+  );
+}
 
 db.close();
 
 console.log(`[DONE] ${createdCount} demo orders created.`);
-console.log(`[INFO] last month: ${formatDate(lastMonthStart)} ~ ${formatDate(lastMonthEnd)}`);
-console.log(`[INFO] this month: ${formatDate(thisMonthStart)} ~ ${formatDate(now)}`);
+
+function resetOrders() {
+  deleteOrderDetails.run();
+  deleteOrders.run();
+  console.log('[RESET] existing orders and order details deleted.');
+}
 
 async function seedOrders({ count, startDate, endDate, weightedMenus }) {
   let createdCount = 0;

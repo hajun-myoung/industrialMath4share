@@ -2,7 +2,7 @@
   "name": "project",
   "type": "module",
   "scripts": {
-    "dev": "node src/data/ensure-db.js && yarn seed:demo-orders && tsx watch src/index.ts",
+    "dev": "node src/data/ensure-db.js && tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
     "db:init": "node src/data/init-db.js",
